@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 // Define a function to get the correct image path
 function getImagePath(name: string): string {
   // Correct path for GitHub Pages deployment
-  return `/bdsl-website/images/${name}`;
+  return `/images/${name}`;
 }
 
 interface Photo {

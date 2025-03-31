@@ -6,7 +6,7 @@ import { cn } from '../utils/cn';
 // Define a function to get the correct image path
 function getImagePath(name: string): string {
   // Correct path for GitHub Pages deployment
-  return `/bdsl-website/images/${name}`;
+  return `/images/${name}`;
 }
 
 export default function Navbar() {
