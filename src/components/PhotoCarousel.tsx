@@ -2,6 +2,12 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+// Define a function to get the correct image path
+function getImagePath(name: string): string {
+  // Correct path for GitHub Pages deployment
+  return `/bdsl-website/images/${name}`;
+}
+
 interface Photo {
   url: string;
   alt: string;
@@ -9,7 +15,7 @@ interface Photo {
 
 const photos: Photo[] = [
   {
-    url: "/images/labteam.jpg",
+    url: getImagePath("labteam.jpg"),
     alt: "Lab Team"
   }
 ];

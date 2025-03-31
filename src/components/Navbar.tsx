@@ -3,6 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 import { cn } from '../utils/cn';
 
+// Define a function to get the correct image path
+function getImagePath(name: string): string {
+  // Correct path for GitHub Pages deployment
+  return `/bdsl-website/images/${name}`;
+}
+
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,12 +42,12 @@ export default function Navbar() {
         <div className="flex justify-between h-20 items-center">
           <div className="flex items-center space-x-4 pl-2">
             <img 
-              src="/images/iiserblogo.jpg" 
+              src={getImagePath('iiserblogo.jpg')} 
               alt="IISER Bhopal Logo" 
               className="h-12 w-auto transition-transform duration-300 hover:scale-105"
             />
             <img 
-              src="/images/biomedlab.jpg" 
+              src={getImagePath('biomedlab.jpg')} 
               alt="BDS Lab Logo" 
               className="h-12 w-auto transition-transform duration-300 hover:scale-105"
             />
