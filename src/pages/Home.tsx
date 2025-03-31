@@ -5,10 +5,10 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import FocusAreaModal from '../components/FocusAreaModal';
 
 const backgroundImages = [
-  '/images/histopath.jpg',
-  '/images/braintumour.png',
-  '/images/lungstum.jpg',
-  '/images/nlpusecase.png'
+  './images/histopath.jpg',
+  './images/braintumour.png',
+  './images/lungstum.jpg',
+  './images/nlpusecase.png'
 ];
 
 const focusAreas = [
