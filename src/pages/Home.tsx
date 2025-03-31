@@ -4,11 +4,19 @@ import { ArrowRight, Brain, BookOpen, Activity } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import FocusAreaModal from '../components/FocusAreaModal';
 
+// Define a function to get the correct image path
+function getImagePath(name: string): string {
+  // Use relative paths starting with ./ for GitHub Pages compatibility
+  return `./images/${name}`;
+}
+
+
+// Use the function to define image paths
 const backgroundImages = [
-  './images/histopath.jpg',
-  './images/braintumour.png',
-  './images/lungstum.jpg',
-  './images/nlpusecase.png'
+  getImagePath('histopath.jpg'),
+  getImagePath('braintumour.png'),
+  getImagePath('lungstum.jpg'),
+  getImagePath('nlpusecase.png')
 ];
 
 const focusAreas = [
@@ -16,19 +24,19 @@ const focusAreas = [
     icon: <Brain size={32} />,
     title: "Automatic Tumor Contouring",
     description: "Head and Neck Cancer (HNC) is the most common cancer in India, with over 500,000 new cases worldwide annually. Radiation therapy is frequently recommended, but requires precise segmentation of tumors in CT scans. This process is labor-intensive and prone to inter-observer variability. We aim to develop a deep learning-based image segmentation framework for automatic tumor contouring to improve accuracy and efficiency in radiotherapy planning.",
-    image: "/images/braintumour.png"
+    image: getImagePath('braintumour.png')
   },
   {
     icon: <BookOpen size={32} />,
     title: "Hemorrhage and Stroke Detection and Classification",
     description: "Intracranial hemorrhage and stroke are critical medical conditions requiring immediate attention. Our research focuses on developing advanced deep learning algorithms for rapid detection and classification of hemorrhages and strokes from CT scans. These tools aim to assist radiologists in making faster, more accurate diagnoses, potentially saving crucial time in emergency situations.",
-    image: "/images/hemorrhage.png"
+    image: getImagePath('hemorrhage.png')
   },
   {
     icon: <Activity size={32} />,
     title: "Clinical Text Mining",
     description: "Clinical notes contain crucial information about patients, including diagnoses, medications, and treatment plans. We develop NLP frameworks for automated text mining from clinical reports to support early disease prediction, adverse event detection, and improved patient care. Our research also integrates image and text-based analysis for enhanced radiology diagnostics.",
-    image: "/images/clinical.png"
+    image: getImagePath('clinical.png')
   }
 ];
 
@@ -150,8 +158,7 @@ export default function Home() {
       </section>
 
       {/* Lab Video Section */}
-{/* Lab Video Section */}
-<section className="py-20 px-4">
+      <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-16">Inside Our Lab</h2>
           <div className="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden shadow-lg">

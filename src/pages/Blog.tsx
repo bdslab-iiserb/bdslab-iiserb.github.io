@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+// No image paths to update in this component
+
 export default function Blog() {
   const location = useLocation();
 

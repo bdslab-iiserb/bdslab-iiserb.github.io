@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 
+// No image paths to update in this component
+
 export default function Contact() {
   const location = useLocation();
 

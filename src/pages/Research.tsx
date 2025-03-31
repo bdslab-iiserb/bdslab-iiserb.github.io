@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+// No need to add the getImagePath function here since there are no images in this component
+
 export default function Research() {
   const location = useLocation();
 
