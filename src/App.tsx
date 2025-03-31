@@ -32,17 +32,6 @@ export default function App() {
               >
                 Department of Data Science and Engineering, IISER Bhopal
               </a>
-              <p className="text-sm text-gray-400 pt-2">
-                Made with <span className="text-red-500">❤️</span> by{" "}
-                <a 
-                  href="https://github.com/srutanik"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-400 hover:text-blue-300 transition-colors"
-                >
-                  srutanik
-                </a>
-              </p>
             </div>
           </div>
         </footer>
