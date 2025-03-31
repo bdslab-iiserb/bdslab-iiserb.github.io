@@ -102,8 +102,7 @@ export default function Home() {
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
               Biomedical Data Science Lab
             </h1>
-            <p className="text-2xl md:text-3xl font-bold text-white mb-8 tracking-wider">IISERB</p>
-            <p className="text-lg md:text-xl text-gray-200 mb-12 max-w-2xl mx-auto">
+            <p className="text-2xl md:text-3xl font-bold text-white mb-8 tracking-wider">Indian Institute of Science Education and Research (IISER) Bhopal</p>            <p className="text-lg md:text-xl text-gray-200 mb-12 max-w-2xl mx-auto">
               Advancing healthcare through artificial intelligence and data science innovations. 
               Our research focuses on medical imaging, clinical text analysis, and biomedical literature mining.
             </p>

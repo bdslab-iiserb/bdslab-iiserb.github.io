@@ -19,7 +19,7 @@ export default function Team() {
   const teamMembers = {
     supervisor: {
       name: "Dr. Tanmay Basu",
-      role: "Assistant Professor, IISER Bhopal",
+      role: "Assistant Professor and Head, Department of Data Science and Engineering, IISER Bhopal",
       specialization: "AI in Healthcare, Predictive Analytics",
       email: "tanmay@iiserb.ac.in",
       image: getImagePath("tanmay.jpg")
@@ -27,21 +27,21 @@ export default function Team() {
     phdScholars: [
       {
         name: "Mr. Prateek Sarangi",
-        research: "Medical Image Segmentation",
+        research: "Deep Learning for Radiotherapy Planning, Medical Image Segmentation",
         email: "prateek24@iiserb.ac.in",
         scholarProfile: "https://scholar.google.com/citations?hl=en&user=WkTHFiIAAAAJ",
         image: getImagePath("prateek.jpg")
       },
       {
         name: "Mr. Rasel Mondal",
-        research: "Medical Image Segmentation",
+        research: "Fuzzy Learning for Medical Image Segmentation",
         email: "rasel23@iiserb.ac.in",
         scholarProfile: "https://scholar.google.com/citations?hl=en&user=lSnr930AAAAJ",
         image: getImagePath("rasel.jpg")
       },
       {
         name: "Mr. Sumit Kumar",
-        research: "NLP Frameworks for CLinical Text Analysis",
+        research: "NLP for Scientific Literature Mining and Clinical Text Analysis for Evidence Synthesis",
         email: "sumit23@iiserb.ac.in",
         linkedIn: "https://www.linkedin.com/in/sumit-kumar-787203178",
         image: getImagePath("sumit.jpg")
@@ -50,32 +50,32 @@ export default function Team() {
     undergrads: [
       {
         name: "Srutanik Bhaduri",
-        research: "Intracranial Hemorrhage Detection and Classification from CT Scans",
+        research: "AI for Brain Hemorrhage Classification",
         email: "srutanik21@iiserb.ac.in",
         image: getImagePath("srutanik.jpg")
       },
       {
         name: "Saisab Sadhu",
-        research: "NLP-Based Inflation Index Generation for Interest Rate Risk Prediction",
+        research: "NLP for Interest Risk Prediction of a Country",
         email: "saisa21@iiserb.ac.in",
         image: getImagePath("saisab.jpg")
       },
       {
         name: "Ashim Dhor",
-        research: "A Deep Learning Framework to Identify Glands in Histopathology Images",
+        research: "Deep Learning for Histopathology Image Analysis",
         email: "ashim21@iiserb.ac.in",
         scholarProfile: "https://scholar.google.com/citations?user=KnN80Q4AAAAJ&hl=en",
         image: getImagePath("ashim.jpg")
       },
       {
         name: "Ramavath Tharun",
-        research: "A NLP Framework to Identify the Potential of Ginger for Arthritis Treatment",
+        research: "Identify the Potential of Ginger for Arthritis Treatment in Literature using LLM",
         email: "ramavath21@iiserb.ac.in",
         image: getImagePath("tharun.jpg")
       },
       {
         name: "Vishwaraj Chavan",
-        research: "Towards Developing a Novel Framework for Chest CT Multi-Label Classification",
+        research: "Deep Learning to Classify Co-morbidities in Chest CT",
         email: "chavan21@iiserb.ac.in",
         image: getImagePath("vishwaraj.jpg")
       }

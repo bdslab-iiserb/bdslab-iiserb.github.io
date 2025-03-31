@@ -39,19 +39,48 @@ export default function Navbar() {
       )}
     >
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between h-20 items-center">
-          <div className="flex items-center space-x-4 pl-2">
-            <img 
-              src={getImagePath('iiserblogo.jpg')} 
-              alt="IISER Bhopal Logo" 
-              className="h-12 w-auto transition-transform duration-300 hover:scale-105"
-            />
-            <img 
-              src={getImagePath('biomedlab.jpg')} 
-              alt="BDS Lab Logo" 
-              className="h-12 w-auto transition-transform duration-300 hover:scale-105"
-            />
-            <span className="font-bold text-2xl tracking-tight hover:text-blue-400 transition-colors duration-300">BDS Lab</span>
+        <div className="flex justify-between h-24 items-center">
+          <div className="flex items-center space-x-6 pl-4">
+            <a 
+              href="https://www.iiserb.ac.in/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="transition-transform duration-300 hover:scale-110"
+            >
+              <img 
+                src={getImagePath('iiserblogo.jpg')} 
+                alt="IISER Bhopal Logo" 
+                className="h-16 w-auto"
+              />
+            </a>
+            <a 
+              href="https://dse.iiserb.ac.in/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="transition-transform duration-300 hover:scale-110"
+            >
+              <img 
+                src={getImagePath('dselogoiiserb.jpg')} 
+                alt="DSE Logo" 
+                className="h-16 w-auto"
+              />
+            </a>
+            <a 
+              href="https://bdslab-iiserb.github.io" 
+              className="transition-transform duration-300 hover:scale-110"
+            >
+              <img 
+                src={getImagePath('biomedlab.jpg')} 
+                alt="BDS Lab Logo" 
+                className="h-16 w-auto"
+              />
+            </a>
+            <Link 
+              to="/"
+              className="font-bold text-2xl tracking-tight hover:text-blue-400 transition-colors duration-300"
+            >
+              BDS Lab
+            </Link>
           </div>
           
           {/* Desktop Navigation */}
