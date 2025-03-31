@@ -7,7 +7,7 @@ import FocusAreaModal from '../components/FocusAreaModal';
 // Define a function to get the correct image path
 function getImagePath(name: string): string {
   // Use relative paths starting with ./ for GitHub Pages compatibility
-  return `/bdsl-website/public/images/${name}`;
+  return `/bdsl-website/images/${name}`;
 }
 
 
