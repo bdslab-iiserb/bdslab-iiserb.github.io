@@ -6,7 +6,7 @@ import PhotoCarousel from '../components/PhotoCarousel';
 // Define a function to get the correct image path
 function getImagePath(name: string): string {
   // Use relative paths starting with ./ for GitHub Pages compatibility
-  return `./images/${name}`;
+  return `/bdsl-website/public/images/${name}`;
 }
 
 export default function Team() {
