@@ -33,7 +33,7 @@ export default function Blog() {
   ];
 
   return (
-    <div className="pt-24 pb-16 px-4">
+    <div className="pt-32 pb-16 px-4">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold text-center mb-16">Latest Updates</h1>
 
