@@ -22,7 +22,9 @@ export default function Team() {
       role: "Assistant Professor and Head, Department of Data Science and Engineering, IISER Bhopal",
       specialization: "AI in Healthcare, Predictive Analytics",
       email: "tanmay@iiserb.ac.in",
-      image: getImagePath("tanmay.jpg")
+      image: getImagePath("tanmay.jpg"),
+      scholarProfile: "https://scholar.google.co.in/citations?user=utfyHkMAAAAJ&hl=en",
+      website: "https://sites.google.com/view/tanmaybasu/"
     },
     phdScholars: [
       {
@@ -101,7 +103,7 @@ export default function Team() {
       },
       {
         name: "Mr. Anirban Dutta",
-        current: "Currently PhD Scholar at Indian Statistical Institute Kolkata",
+        current: "",
         linkedIn: "https://in.linkedin.com/in/anirban-dutta",
         image: getImagePath("anirban.jpg")
       }
@@ -109,7 +111,7 @@ export default function Team() {
   };
 
   return (
-    <div className="pt-24 pb-16 px-4 bg-gray-50">
+    <div className="pt-32 pb-16 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold text-center mb-16">Meet Our Team</h1>
 
@@ -135,15 +137,36 @@ export default function Team() {
                 />
               </div>
               <div>
-                <h3 className="text-xl font-bold">{teamMembers.supervisor.name}</h3>
+                <h3 className="text-xl font-bold">
+                  <a 
+                    href={teamMembers.supervisor.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-800 hover:text-blue-600 transition-colors"
+                  >
+                    {teamMembers.supervisor.name}
+                  </a>
+                </h3>
                 <p className="text-gray-600">{teamMembers.supervisor.role}</p>
                 <p className="text-gray-600">{teamMembers.supervisor.specialization}</p>
-                <a 
-                  href={`mailto:${teamMembers.supervisor.email}`}
-                  className="text-blue-600 hover:text-blue-800"
-                >
-                  {teamMembers.supervisor.email}
-                </a>
+                <div className="flex flex-wrap gap-4 mt-2">
+                  <a 
+                    href={`mailto:${teamMembers.supervisor.email}`}
+                    className="text-blue-600 hover:text-blue-800"
+                  >
+                    Email
+                  </a>
+                  {teamMembers.supervisor.scholarProfile && (
+                    <a 
+                      href={teamMembers.supervisor.scholarProfile}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800"
+                    >
+                      Google Scholar
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           </motion.div>

@@ -13,7 +13,7 @@ export default function Contact() {
   }, [location.pathname]);
 
   return (
-    <div className="pt-24 pb-16 px-4">
+    <div className="pt-32 pb-16 px-4">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold text-center mb-16">Contact Us</h1>
 
