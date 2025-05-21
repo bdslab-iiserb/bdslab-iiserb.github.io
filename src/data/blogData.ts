@@ -9,7 +9,7 @@ export const blogPosts: BlogPostProps[] = [
     presentationImageFolderName: "deepneuroscan", // Subfolder name in public/presentation_images/
     presentationNumPages: 11, // Manually set: total number of images (e.g., 1.png to 25.png)
     presentationCaption: "DeepNeuroScan: Research Overview",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    videoUrl: "https://www.youtube.com/embed/xfFgQGGQGDs"
   },
   {
     title: "CLARITY: AI Powered PICO Extraction & Systematic Review",
@@ -18,7 +18,7 @@ export const blogPosts: BlogPostProps[] = [
     presentationImageFolderName: "clarity",
     presentationNumPages: 11,
     presentationCaption: "CLARITY: System and Methodology",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    videoUrl: "https://www.youtube.com/embed/8-Hf4Nhj01E"
   },
   {
     title: "HistAI: Histopathology Analysis and Imaging",
@@ -26,6 +26,6 @@ export const blogPosts: BlogPostProps[] = [
     abstract: "Subjectivity in histopathological gland segmentation for cancer diagnosis contributes to diagnostic variability. Current AI tools often lack robust validation and fail to address inherent uncertainties adequately. To overcome these limitations, we propose an AI-based semantic segmentation solution featuring key innovations: an optimized UNet++ architecture tailored for glandular morphology and a dual uncertainty quantification framework that provides confidence maps by distinguishing between model and data ambiguities. This approach aims to minimize uncertainties, reduce subjectivity, and enhance diagnostic consistency and efficiency, significantly advancing histopathological analysis.",
     presentationImageFolderName: "histai",
     presentationNumPages: 10,
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    videoUrl: "https://www.youtube.com/embed/P5rIK4-4YeU"
   }
 ];
