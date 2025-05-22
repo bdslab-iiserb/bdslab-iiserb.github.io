@@ -1,9 +1,10 @@
+// src/App.tsx
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar'; // Make sure to remove "Blog" link from Navbar.tsx
 import Home from './pages/Home';
 import Team from './pages/Team';
 import Research from './pages/Research';
-import Blog from './pages/Blog';
+// import Blog from './pages/Blog'; // REMOVED: Blog page is no longer used
 import Contact from './pages/Contact';
 
 export default function App() {
@@ -16,7 +17,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/team" element={<Team />} />
             <Route path="/research" element={<Research />} />
-            <Route path="/blog" element={<Blog />} />
+            {/* <Route path="/blog" element={<Blog />} /> REMOVED: Blog route */}
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
@@ -24,7 +25,7 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4">
               <p>© BDS Lab @IISERB</p>
-              <a 
+              <a
                 href="https://dse.iiserb.ac.in/"
                 target="_blank"
                 rel="noopener noreferrer"
