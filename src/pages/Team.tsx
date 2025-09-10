@@ -49,7 +49,8 @@ export default function Team() {
         image: getImagePath("sumit.jpg")
       }
     ],
-    undergrads: [
+    // undergrads: [
+    Master's Students: [
       {
         name: "Srutanik Bhaduri",
         research: "AI for Brain Hemorrhage Classification",
@@ -58,7 +59,7 @@ export default function Team() {
       },
       {
         name: "Saisab Sadhu",
-        research: "NLP for Interest Risk Prediction of a Country",
+        research: "Earning Call Analysis",
         email: "saisa21@iiserb.ac.in",
         image: getImagePath("saisab.jpg")
       },
@@ -70,19 +71,38 @@ export default function Team() {
         image: getImagePath("ashim.jpg")
       },
       {
+        name: "Himadri Sonowal",
+        research: "Legal Text Summarization",
+        email: "himadri20@iiserb.ac.in",
+        // scholarProfile: "https://scholar.google.com/citations?user=KnN80Q4AAAAJ&hl=en",
+        image: getImagePath("ashim.jpg")
+      }
+      // {
+      //   name: "Ramavath Tharun",
+      //   research: "Identify the Potential of Ginger for Arthritis Treatment in Literature using LLM",
+      //   email: "ramavath21@iiserb.ac.in",
+      //   image: getImagePath("tharun.jpg")
+      // },
+      // {
+      //   name: "Vishwaraj Chavan",
+      //   research: "Deep Learning to Classify Co-morbidities in Chest CT",
+      //   email: "chavan21@iiserb.ac.in",
+      //   image: getImagePath("vishwaraj.jpg")
+      // }
+    ],
+    alumni: [
+      {
         name: "Ramavath Tharun",
-        research: "Identify the Potential of Ginger for Arthritis Treatment in Literature using LLM",
+        // research: "Identify the Potential of Ginger for Arthritis Treatment in Literature using LLM",
         email: "ramavath21@iiserb.ac.in",
         image: getImagePath("tharun.jpg")
       },
       {
         name: "Vishwaraj Chavan",
-        research: "Deep Learning to Classify Co-morbidities in Chest CT",
+        // research: "Deep Learning to Classify Co-morbidities in Chest CT",
         email: "chavan21@iiserb.ac.in",
         image: getImagePath("vishwaraj.jpg")
       }
-    ],
-    alumni: [
       {
         name: "Ms Shraddha Agarwal",
         current: "Currently MBA student at Indian Institute of Management Calcutta",
