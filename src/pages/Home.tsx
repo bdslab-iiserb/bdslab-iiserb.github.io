@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Brain, BookOpen, Activity } from 'lucide-react';
+import { ArrowRight, Brain, BookOpen, Activity, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import FocusAreaModal from '../components/FocusAreaModal';
 
@@ -9,7 +9,6 @@ function getImagePath(name: string): string {
   // Use relative paths starting with ./ for GitHub Pages compatibility
   return `/images/${name}`;
 }
-
 
 // Use the function to define image paths
 const backgroundImages = [
@@ -40,9 +39,22 @@ const focusAreas = [
   }
 ];
 
+// Lab videos data
+const labVideos = [
+  {
+    id: "wsSue55t3Jo",
+    title: "Podcast on AI in Mental Health by Dr. Tanmay Basu"
+  },
+  {
+    id: "ArjP3hiCtuQ",
+    title: "Inside Our Lab"
+  }
+];
+
 export default function Home() {
   const [selectedArea, setSelectedArea] = useState<number | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -66,6 +78,15 @@ export default function Home() {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Video navigation functions
+  const nextVideo = () => {
+    setCurrentVideoIndex((current) => (current + 1) % labVideos.length);
+  };
+
+  const prevVideo = () => {
+    setCurrentVideoIndex((current) => (current - 1 + labVideos.length) % labVideos.length);
+  };
 
   return (
     <div className="min-h-screen">
@@ -102,7 +123,8 @@ export default function Home() {
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
               Biomedical Data Science Lab
             </h1>
-            <p className="text-2xl md:text-3xl font-bold text-white mb-8 tracking-wider">Indian Institute of Science Education and Research (IISER) Bhopal</p>            <p className="text-lg md:text-xl text-gray-200 mb-12 max-w-2xl mx-auto">
+            <p className="text-2xl md:text-3xl font-bold text-white mb-8 tracking-wider">Indian Institute of Science Education and Research (IISER) Bhopal</p>            
+            <p className="text-lg md:text-xl text-gray-200 mb-12 max-w-2xl mx-auto">
               Advancing healthcare through artificial intelligence and data science innovations. 
               Our research focuses on medical imaging, clinical text analysis, and biomedical literature mining.
             </p>
@@ -156,18 +178,73 @@ export default function Home() {
         )}
       </section>
 
-      {/* Lab Video Section */}
+      {/* Lab Videos Section */}
       <section className="py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-16">Inside Our Lab</h2>
-          <div className="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden shadow-lg">
-            <iframe 
-              src="https://www.youtube.com/embed/ArjP3hiCtuQ" 
-              title="Lab Video"
-              className="w-full h-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowFullScreen
-            ></iframe>
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Media</h2>
+          
+          {/* Video container with navigation */}
+          <div className="relative">
+            <div className="overflow-hidden rounded-xl shadow-lg">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentVideoIndex}
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ duration: 0.3 }}
+                  className="aspect-video"
+                >
+                  <iframe 
+                    src={`https://www.youtube.com/embed/${labVideos[currentVideoIndex].id}`}
+                    title={labVideos[currentVideoIndex].title}
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                  ></iframe>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Navigation buttons */}
+            <button
+              onClick={prevVideo}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
+              aria-label="Previous video"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            <button
+              onClick={nextVideo}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
+              aria-label="Next video"
+            >
+              <ChevronRight size={24} />
+            </button>
+
+            {/* Video indicators */}
+            <div className="flex justify-center mt-6 gap-2">
+              {labVideos.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentVideoIndex(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentVideoIndex 
+                      ? 'bg-blue-600 scale-110' 
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                  aria-label={`Go to video ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Video title */}
+            <div className="text-center mt-4">
+              <h3 className="text-xl font-semibold text-gray-800">
+                {labVideos[currentVideoIndex].title}
+              </h3>
+            </div>
           </div>
         </div>
       </section>
