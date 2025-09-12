@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import PhotoCarousel from '../components/PhotoCarousel';
+import { li } from 'framer-motion/client';
+import { link } from 'fs';
 
 // Define a function to get the correct image path
 function getImagePath(name: string): string {
@@ -11,7 +13,7 @@ function getImagePath(name: string): string {
 
 export default function Team() {
   const location = useLocation();
-
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
@@ -49,17 +51,16 @@ export default function Team() {
         image: getImagePath("sumit.jpg")
       }
     ],
-    // undergrads: [
-    Master's Students: [
+    mastersStudents: [
       {
         name: "Srutanik Bhaduri",
-        research: "AI for Brain Hemorrhage Classification",
+        research: "Semi-Supervised Learning and Domain Adaptation for Medical Image Analysis",
         email: "srutanik21@iiserb.ac.in",
         image: getImagePath("srutanik.jpg")
       },
       {
         name: "Saisab Sadhu",
-        research: "Earning Call Analysis",
+        research: "Multi Agent Systems for Earning Call Analysis",
         email: "saisa21@iiserb.ac.in",
         image: getImagePath("saisab.jpg")
       },
@@ -74,35 +75,23 @@ export default function Team() {
         name: "Himadri Sonowal",
         research: "Legal Text Summarization",
         email: "himadri20@iiserb.ac.in",
-        // scholarProfile: "https://scholar.google.com/citations?user=KnN80Q4AAAAJ&hl=en",
-        image: getImagePath("ashim.jpg")
+        image: getImagePath("himadri.jpg")
       }
-      // {
-      //   name: "Ramavath Tharun",
-      //   research: "Identify the Potential of Ginger for Arthritis Treatment in Literature using LLM",
-      //   email: "ramavath21@iiserb.ac.in",
-      //   image: getImagePath("tharun.jpg")
-      // },
-      // {
-      //   name: "Vishwaraj Chavan",
-      //   research: "Deep Learning to Classify Co-morbidities in Chest CT",
-      //   email: "chavan21@iiserb.ac.in",
-      //   image: getImagePath("vishwaraj.jpg")
-      // }
     ],
     alumni: [
       {
         name: "Ramavath Tharun",
-        // research: "Identify the Potential of Ginger for Arthritis Treatment in Literature using LLM",
+        current: "Currently Solutions Analyst at Nucleus Software",
+        linkedIn: "https://www.linkedin.com/in/ramavath-tharun-493496263/",
         email: "ramavath21@iiserb.ac.in",
         image: getImagePath("tharun.jpg")
       },
       {
         name: "Vishwaraj Chavan",
-        // research: "Deep Learning to Classify Co-morbidities in Chest CT",
         email: "chavan21@iiserb.ac.in",
+        linkedIn: "https://www.linkedin.com/in/vishwarajchavan/",
         image: getImagePath("vishwaraj.jpg")
-      }
+      },
       {
         name: "Ms Shraddha Agarwal",
         current: "Currently MBA student at Indian Institute of Management Calcutta",
@@ -134,7 +123,7 @@ export default function Team() {
     <div className="pt-32 pb-16 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold text-center mb-16">Meet Our Team</h1>
-
+        
         {/* Photo Carousel */}
         <div className="mb-16">
           <PhotoCarousel />
@@ -248,11 +237,11 @@ export default function Team() {
           </div>
         </section>
 
-        {/* Undergraduate Students Section */}
+        {/* Master's Students Section */}
         <section className="mb-16">
-          <h2 className="text-2xl font-semibold mb-8">Undergraduate Students</h2>
+          <h2 className="text-2xl font-semibold mb-8">Master's Students</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {teamMembers.undergrads.map((student, index) => (
+            {teamMembers.mastersStudents.map((student, index) => (
               <motion.div
                 key={student.name}
                 initial={{ opacity: 0, y: 20 }}
