@@ -60,7 +60,7 @@ export default function Team() {
       },
       {
         name: "Saisab Sadhu",
-        research: "Multi Agent Systems for Earning Call Analysis",
+        research: "Overcoming Imperfect Retrieval Augmentation and Knowledge Conflicts in RAG Frameworks",
         email: "saisa21@iiserb.ac.in",
         image: getImagePath("saisab.jpg")
       },
