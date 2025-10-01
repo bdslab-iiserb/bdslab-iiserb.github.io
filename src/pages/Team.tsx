@@ -111,8 +111,9 @@ export default function Team() {
         image: getImagePath("hritik.jpg")
       },
       {
-        name: "Mr. Anirban Dutta",
-        current: "",
+        name: "Mr. Anirban Tarafdar",
+        current: "Assistant Professor, Amrita Vishwa Vidyapeetham, Faridabad",
+        scholarProfile: "https://scholar.google.com/citations?user=LGvUz2sAAAAJ&hl=en",
         linkedIn: "https://in.linkedin.com/in/anirban-dutta",
         image: getImagePath("anirban.jpg")
       }
