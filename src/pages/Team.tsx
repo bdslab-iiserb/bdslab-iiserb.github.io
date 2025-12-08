@@ -49,6 +49,12 @@ export default function Team() {
         email: "sumit23@iiserb.ac.in",
         linkedIn: "https://www.linkedin.com/in/sumit-kumar-787203178",
         image: getImagePath("sumit.jpg")
+      },
+      {
+        name: "Dr. Pragya Kumari",
+        research: "Postdoctoral Researcher",
+        email: "pragya@iiserb.ac.in",
+        image: getImagePath("pragya.jpeg")
       }
     ],
     mastersStudents: [
@@ -182,9 +188,9 @@ export default function Team() {
           </motion.div>
         </section>
 
-        {/* PhD Scholars Section */}
+        {/* PhD Scholars and Postdocs Section */}
         <section className="mb-16">
-          <h2 className="text-2xl font-semibold mb-8">PhD Scholars</h2>
+          <h2 className="text-2xl font-semibold mb-8">PhD Scholars and Postdocs</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {teamMembers.phdScholars.map((scholar, index) => (
               <motion.div

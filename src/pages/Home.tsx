@@ -121,9 +121,15 @@ export default function Home() {
             className="bg-black/50 backdrop-blur-md rounded-2xl p-8 shadow-xl" 
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
-              Biomedical Data Science Lab
+              <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
+                Biomedical Data Science Lab
+              </span>
             </h1>
-            <p className="text-2xl md:text-3xl font-bold text-white mb-8 tracking-wider">Indian Institute of Science Education and Research (IISER) Bhopal</p>            
+            <p className="text-xl md:text-2xl font-semibold text-gray-100 mb-8 tracking-wide">
+              Indian Institute of Science Education and Research{' '}
+              <span className="text-blue-300 font-bold">(IISER)</span>{' '}
+              <span className="text-blue-400 font-bold">Bhopal</span>
+            </p>            
             <p className="text-lg md:text-xl text-gray-200 mb-12 max-w-2xl mx-auto">
               Advancing healthcare through artificial intelligence and data science innovations. 
               Our research focuses on medical imaging, clinical text analysis, and biomedical literature mining.
@@ -176,6 +182,90 @@ export default function Home() {
             image={focusAreas[selectedArea].image}
           />
         )}
+      </section>
+
+      {/* News Section */}
+      <section className="py-20 px-4 bg-gradient-to-b from-blue-50 to-white">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold text-center mb-4"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+              Latest News
+            </span>
+          </motion.h2>
+          <p className="text-center text-gray-600 mb-12 text-lg">Recent achievements and updates from our lab</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                title: "Paper Accepted at Artificial Intelligence and Medicine Journal",
+                description: "Congratulations to Prateek and team!",
+                icon: "🎉",
+                gradient: "from-blue-500 to-blue-600"
+              },
+              {
+                title: "Paper Accepted at Neuroscience Informatics Journal",
+                description: "Congratulations to Srutanik and team!",
+                icon: "🧠",
+                gradient: "from-purple-500 to-purple-600"
+              },
+              {
+                title: "AAAI-2026 Student Abstract Accepted",
+                description: "Congratulations to Ashim!",
+                icon: "🌟",
+                gradient: "from-cyan-500 to-cyan-600"
+              },
+              {
+                title: "Paper Accepted at IJCNLP-AACL 2025",
+                description: "Congratulations to Himadri and Saisab!",
+                icon: "📝",
+                gradient: "from-green-500 to-green-600"
+              },
+              {
+                title: "Paper Accepted at FinNLP @ EMNLP 2025",
+                description: "Congratulations to Saisab!",
+                icon: "💼",
+                gradient: "from-orange-500 to-orange-600"
+              }
+            ].map((news, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+              >
+                {/* Gradient top border */}
+                <div className={`h-1.5 bg-gradient-to-r ${news.gradient}`}></div>
+                
+                <div className="p-6">
+                  {/* Icon */}
+                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                    {news.icon}
+                  </div>
+                  
+                  {/* Title */}
+                  <h3 className="text-lg font-bold text-gray-800 mb-3 leading-tight">
+                    {news.title}
+                  </h3>
+                  
+                  {/* Description */}
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {news.description}
+                  </p>
+                </div>
+
+                {/* Hover effect overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${news.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Lab Videos Section */}

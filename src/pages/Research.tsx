@@ -2,12 +2,85 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
-import { Activity, Github } from 'lucide-react'; // Github icon for links
+import { Activity, Github } from 'lucide-react';
 
-import { modalProjects, ModalProject, ExtendedProjectDetailCardProps } from '../data/detailedProjectData'; // Ensure correct path and import Extended...
-import ProjectModal from '../components/ProjectModal'; // Ensure correct path
+import { modalProjects, ModalProject, ExtendedProjectDetailCardProps } from '../data/detailedProjectData';
+import ProjectModal from '../components/ProjectModal';
+import PublicationCarousel, { Publication } from '../components/PublicationCarousel';
 
 const getImagePath = (name: string): string => `/images/${name}`;
+
+// Publications data for carousel
+const publications: Publication[] = [
+   {
+    id: '1',
+    title: 'ProtoRadNet: Prototypical patches of Convolutional Features for Radiology Image Classification Network',
+    authors: 'Prateek Sarangi, Riya Agarwal, Tanmay Basu',
+    venue: 'Artificial Intelligence in Medicine, Elsevier',
+    year: 2025,
+    type: 'journal',
+    link:'https://www.sciencedirect.com/science/article/pii/S0933365725002593',
+    image:'/images/papers/protoradnet.png'
+  },
+
+     {
+    id: '2',
+    title: 'Attention-Gated CNN and discrete wavelet transform based ensemble framework for brain hemorrhage classification',
+    authors: 'Srutanik Bhaduri, Rasel Mondal, Prateek Sarangi, Vinod Kumar Kurmi, Swati Goyal, Lovely Kaushal, Mahek Sodani, Tanmay Basu',
+    venue: 'Neuroscience Informatics, Elsevier',
+    year: 2025,
+    type: 'journal',
+    link:'https://www.sciencedirect.com/science/article/pii/S2772528625000585',
+    image:'/images/papers/agcnn.png'
+  },
+
+
+     {
+    id: '3',
+    title: 'Structured Adversarial Synthesis: A Multi-Agent Framework for Generating Persuasive Financial Analysis from Earnings Call Transcripts',
+    authors: 'Saisab Sadhu, Biswajit Patra, Tanmay Basu',
+    venue: 'FinNLP @ EMNLP 2025',
+    year: 2025,
+    type: 'conference',
+    link:'https://aclanthology.org/2025.finnlp-2.21.pdf',
+    image:'/images/papers/sas.png'
+  },
+
+  {
+    
+    id: '4',
+    title: 'Modeling International Tourist Arrivals: An NLP Perspective',
+    authors: 'Archana Yadav, Biswajit Patra, Tanmay Basu',
+    venue: 'Operations Research Forum, Springer Nature',
+    year: 2024,
+    type: 'journal',
+    link: 'https://link.springer.com/article/10.1007/s43069-024-00365-1',
+    image: '/images/papers/mita.png'
+  },
+  {
+    id: '5',
+    title: 'TCPNet: A Novel Tumor Contour Prediction Network using MRIs',
+    authors: 'Shraddha Agarwal, Vinod Kumar Kurmi, Abhirup Banerjee, Tanmay Basu',
+    venue: 'IEEE International Conference on Healthcare Informatics',
+    year: 2024,
+    type: 'conference',
+    link: 'https://ieeexplore.ieee.org/document/10628585',
+    image: '/images/papers/tcpnet.png'
+
+  },
+  {
+    id: '6',
+    title: 'Uncertainty Quantification in Deep Learning Framework for Mallampati Classification',
+    authors: 'Anuradha Mahato, Prateek Sarangi, Vinod Kumar Kurmi',
+    venue: 'IEEE International Conference on Healthcare Informatics',
+    year: 2024,
+    type: 'conference',
+    link: 'https://ieeexplore.ieee.org/document/10628627c',
+    image: '/images/papers/mallam.png'
+
+
+  }
+];
 
 const staticTumorContouringProject = {
   icon: <Activity size={36} />,
@@ -101,6 +174,23 @@ export default function Research() {
             <li>Natural Language Processing (NLP)</li>
             <li>Social Media and Scientific Literature Mining</li>
           </ul>
+        </motion.section>
+
+        {/* Recent Publications Carousel Section */}
+        <motion.section
+          className="mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <h2 className="text-4xl font-bold text-center mb-4 text-gray-800 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Recent Publications
+          </h2>
+          <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto text-lg leading-relaxed">
+            Explore our latest research contributions in AI for healthcare, medical imaging, and biomedical data science.
+          </p>
+          <PublicationCarousel publications={publications} />
         </motion.section>
 
         {/* Project Spotlights Section */}
@@ -208,34 +298,6 @@ export default function Research() {
             ))}
           </div>
         </section>
-
-        {/* Recent Publications Section */}
-        <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-        >
-            <h2 className="text-3xl font-bold mb-8 text-gray-700">Recent Publications</h2>
-            <div className="space-y-8">
-                <motion.div className="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
-                    <h3 className="text-2xl font-semibold mb-4 text-gray-800">Journal Articles</h3>
-                    <ul className="space-y-4 text-gray-700 text-lg leading-relaxed">
-                        <li>Archana Yadav, Biswajit Patra, Tanmay Basu, <i>Modeling International Tourist Arrivals: An NLP Perspective</i>. <b>Operations Research Forum</b>, Springer Nature, 2024.</li>
-                        <li>Arnab Roy, Tanmay Basu, <i>Postimpact Similarity: A Similarity Measure for Effective Grouping of Unlabelled Text</i>. <b>Knowledge and Information Systems</b>, Springer, 2022.</li>
-                        <li>Tanmay Basu, Simon Goldsworthy, Georgios V. Gkoutos, <i>A Sentence Classification Framework to Identify Geometric Errors in Radiation Therapy</i>. <b>Information, MDPI</b>, 2021.</li>
-                    </ul>
-                </motion.div>
-                <motion.div className="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
-                    <h3 className="text-2xl font-semibold mb-4 text-gray-800">Conference Papers</h3>
-                    <ul className="space-y-4 text-gray-700 text-lg leading-relaxed">
-                        <li>Shraddha Agarwal, Vinod Kumar Kurmi, Abhirup Banerjee, Tanmay Basu, <i>TCPNet: A Novel Tumor Contour Prediction Network using MRIs</i>. <b>IEEE International Conference on Healthcare Informatics</b>, USA, 2024.</li>
-                        <li>Anuradha Mahato, Prateek Sarangi, Vinod Kumar Kurmi, <i>Uncertainty Quantification in Deep Learning Framework for Mallampati Classification</i>. <b>IEEE International Conference on Healthcare Informatics</b>, USA, 2024.</li>
-                        <li>Arkapal Panda, Tanmay Basu, Vaibhav Kumar, <i>An Ensemble Learning Framework for Visibility Prediction</i>. <b>ICLR Tiny Papers</b>, 2023.</li>
-                    </ul>
-                </motion.div>
-            </div>
-        </motion.section>
       </div>
 
       <ProjectModal
