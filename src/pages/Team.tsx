@@ -59,7 +59,7 @@ export default function Team() {
         name: "Dr. Pragya Kumari",
         research: "Postdoctoral Researcher",
         email: "pragya@iiserb.ac.in",
-        linkedin:'',
+        linkedin:'https://www.linkedin.com/in/pragya7859/?originalSubdomain=in',
         scholarProfile:'https://scholar.google.com/citations?user=SmVgJMEAAAAJ&hl=en',
         image: getImagePath("pragya.jpeg")
       }
