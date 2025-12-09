@@ -57,11 +57,20 @@ export default function Team() {
       },
       {
         name: "Dr. Pragya Kumari",
-        research: "Postdoctoral Researcher",
+        research: "Biostatistics",
         email: "pragya@iiserb.ac.in",
         linkedin:'https://www.linkedin.com/in/pragya7859/?originalSubdomain=in',
         scholarProfile:'https://scholar.google.com/citations?user=SmVgJMEAAAAJ&hl=en',
         image: getImagePath("pragya.jpeg")
+      },
+
+      {
+        name: "Dr. Riya Agarwal",
+        research: "Medical Image Analysis",
+        email: "riyagarwal182@gmail.com",
+        linkedin: '',
+        scholarProfile: "",
+        image: getImagePath("riya.jpeg")
       }
     ],
     mastersStudents: [
@@ -95,7 +104,8 @@ export default function Team() {
         email: "himadri20@iiserb.ac.in",
         linkedin:'https://www.linkedin.com/in/himadri-sonowal-9b5067202/',
         image: getImagePath("himadri.jpg")
-      }
+      },
+
     ],
     alumni: [
       {
@@ -201,9 +211,9 @@ export default function Team() {
           </motion.div>
         </section>
 
-        {/* PhD Scholars and Postdocs Section */}
+        {/* PhD Scholars, Postdocs and Doctors Section */}
         <section className="mb-16">
-          <h2 className="text-2xl font-semibold mb-8">PhD Scholars and Postdocs</h2>
+          <h2 className="text-2xl font-semibold mb-8">PhD Scholars, Postdocs and Doctors</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {teamMembers.phdScholars.map((scholar, index) => (
               <motion.div
