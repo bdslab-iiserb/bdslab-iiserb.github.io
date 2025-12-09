@@ -1,7 +1,7 @@
 // src/components/Navbar.tsx
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu } from 'lucide-react';
+import { Menu, Github } from 'lucide-react';
 import { cn } from '../utils/cn'; // Assuming cn.ts exists in src/utils/
 
 // Define a function to get the correct image path
@@ -31,7 +31,7 @@ export default function Navbar() {
     { path: '/', label: 'Home' },
     { path: '/team', label: 'Team' },
     { path: '/research', label: 'Research' },
-    // { path: '/blog', label: 'Blog' }, // REMOVED Blog link
+    { path: 'https://github.com/bdslab-iiserb', label: 'GitHub', external: true },
     { path: '/contact', label: 'Contact' }
   ];
 
@@ -39,14 +39,13 @@ export default function Navbar() {
     <nav
       className={cn(
         'fixed w-full z-50 transition-all duration-300',
-        'bg-black', // Base background color
-        'text-white' // Base text color
-        // isScrolled ? 'bg-black/90 shadow-lg backdrop-blur-sm' : 'bg-black' // Example of using isScrolled
+        'bg-gradient-to-r from-white via-blue-50 to-cyan-50 shadow-lg border-b border-blue-100',
+        'text-gray-800'
       )}
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[95%] mx-auto">
         <div className="flex justify-between h-24 items-center">
-          <div className="flex items-center space-x-6 pl-4">
+          <div className="flex items-center space-x-4 pl-2">
             <a
               href="https://www.iiserb.ac.in/"
               target="_blank"
@@ -66,7 +65,7 @@ export default function Navbar() {
               className="transition-transform duration-300 hover:scale-110"
             >
               <img
-                src={getImagePath('dselogoiiserb.jpg')}
+                src={getImagePath('dselogoiiserb.png')}
                 alt="DSE Logo"
                 className="h-16 w-auto"
               />
@@ -83,33 +82,46 @@ export default function Navbar() {
             </a>
             <Link
               to="/"
-              className="font-bold text-2xl tracking-tight hover:text-blue-400 transition-colors duration-300"
+              className="font-bold text-2xl tracking-tight text-gray-800 hover:text-blue-600 transition-colors duration-300"
             >
               BDS Lab
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8 pr-8">
+          <div className="hidden md:flex space-x-8 pr-4 items-center">
             {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={cn(
-                  'transition-all duration-300 hover:text-blue-400 text-lg tracking-wide',
-                  location.pathname === link.path
-                    ? 'font-semibold border-b-2 border-blue-400'
-                    : 'hover:border-b-2 hover:border-blue-400/50'
-                )}
-              >
-                {link.label}
-              </Link>
+              link.external ? (
+                <a
+                  key={link.path}
+                  href={link.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-all duration-300 hover:text-blue-600 text-lg tracking-wide font-medium text-gray-700 hover:scale-110 flex items-center gap-1"
+                >
+                  <Github size={20} />
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={cn(
+                    'transition-all duration-300 hover:text-blue-600 text-lg tracking-wide font-medium',
+                    location.pathname === link.path
+                      ? 'font-bold border-b-2 border-blue-600 text-blue-600'
+                      : 'text-gray-700 hover:border-b-2 hover:border-blue-500'
+                  )}
+                >
+                  {link.label}
+                </Link>
+              )
             ))}
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 mr-4 rounded-lg hover:bg-white/10 transition-colors duration-300"
+            className="md:hidden p-2 mr-4 rounded-lg hover:bg-blue-100 transition-colors duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
@@ -120,22 +132,35 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden bg-black shadow-lg rounded-b-xl border-t border-white/10">
+          <div className="md:hidden bg-white shadow-lg rounded-b-xl border-t border-blue-200">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={cn(
-                    "block px-4 py-3 rounded-lg text-lg transition-all duration-300",
-                    location.pathname === link.path
-                      ? "bg-blue-500/20 text-blue-400 font-medium"
-                      : "text-gray-100 hover:bg-white/10"
-                  )}
-                  onClick={() => setIsMenuOpen(false)} // Close menu on link click
-                >
-                  {link.label}
-                </Link>
+                link.external ? (
+                  <a
+                    key={link.path}
+                    href={link.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-4 py-3 rounded-lg text-lg transition-all duration-300 text-gray-700 hover:bg-blue-50 flex items-center gap-2"
+                  >
+                    <Github size={20} />
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={cn(
+                      "block px-4 py-3 rounded-lg text-lg transition-all duration-300",
+                      location.pathname === link.path
+                        ? "bg-blue-100 text-blue-600 font-bold"
+                        : "text-gray-700 hover:bg-blue-50"
+                    )}
+                    onClick={() => setIsMenuOpen(false)} // Close menu on link click
+                  >
+                    {link.label}
+                  </Link>
+                )
               ))}
             </div>
           </div>

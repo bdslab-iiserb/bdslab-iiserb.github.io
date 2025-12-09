@@ -21,15 +21,15 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
-        <footer className="bg-gray-900 text-white py-8">
+        <footer className="bg-gradient-to-r from-blue-900 via-blue-800 to-cyan-900 text-white py-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4">
-              <p>© BDS Lab @IISERB</p>
+              <p className="text-lg font-semibold">© BDS Lab @IISERB</p>
               <a
                 href="https://dse.iiserb.ac.in/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-400 hover:text-blue-300 transition-colors"
+                className="text-cyan-300 hover:text-cyan-200 transition-colors inline-block font-medium"
               >
                 Department of Data Science and Engineering, IISER Bhopal
               </a>

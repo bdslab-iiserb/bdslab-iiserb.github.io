@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import PhotoCarousel from '../components/PhotoCarousel';
 import { li } from 'framer-motion/client';
 import { link } from 'fs';
+import { Linkedin } from 'lucide-react';
 
 // Define a function to get the correct image path
 function getImagePath(name: string): string {
@@ -26,7 +27,8 @@ export default function Team() {
       email: "tanmay@iiserb.ac.in",
       image: getImagePath("tanmay.jpg"),
       scholarProfile: "https://scholar.google.co.in/citations?user=utfyHkMAAAAJ&hl=en",
-      website: "https://sites.google.com/view/tanmaybasu/"
+      website: "https://sites.google.com/view/tanmaybasu/",
+      linkedin:'https://www.linkedin.com/in/tanmay-basu-022a291b8/?originalSubdomain=in'
     },
     phdScholars: [
       {
@@ -34,6 +36,7 @@ export default function Team() {
         research: "Deep Learning for Radiotherapy Planning, Medical Image Segmentation",
         email: "prateek24@iiserb.ac.in",
         scholarProfile: "https://scholar.google.com/citations?hl=en&user=WkTHFiIAAAAJ",
+        linkedin:'https://www.linkedin.com/in/prateeksarangi/',
         image: getImagePath("prateek.jpg")
       },
       {
@@ -41,19 +44,23 @@ export default function Team() {
         research: "Fuzzy Learning for Medical Image Segmentation",
         email: "rasel23@iiserb.ac.in",
         scholarProfile: "https://scholar.google.com/citations?hl=en&user=lSnr930AAAAJ",
+        linkedin:'https://www.linkedin.com/in/raselmondal123/',
         image: getImagePath("rasel.jpg")
       },
       {
         name: "Mr. Sumit Kumar",
         research: "NLP for Scientific Literature Mining and Clinical Text Analysis for Evidence Synthesis",
         email: "sumit23@iiserb.ac.in",
-        linkedIn: "https://www.linkedin.com/in/sumit-kumar-787203178",
+        linkedin: "https://www.linkedin.com/in/sumit-kumar-787203178",
+        scholarProfile: "https://scholar.google.com/citations?user=AWvPsFUAAAAJ&hl=en",
         image: getImagePath("sumit.jpg")
       },
       {
         name: "Dr. Pragya Kumari",
         research: "Postdoctoral Researcher",
         email: "pragya@iiserb.ac.in",
+        linkedin:'',
+        scholarProfile:'https://scholar.google.com/citations?user=SmVgJMEAAAAJ&hl=en',
         image: getImagePath("pragya.jpeg")
       }
     ],
@@ -62,18 +69,23 @@ export default function Team() {
         name: "Srutanik Bhaduri",
         research: "Semi-Supervised Learning and Domain Adaptation for Medical Image Analysis",
         email: "srutanik21@iiserb.ac.in",
+        linkedin:'https://www.linkedin.com/in/srutanik-bhaduri-3a9a691b9/',
+        scholarProfile:'http://scholar.google.com/citations?user=MhOwQT4AAAAJ&hl=en',
         image: getImagePath("srutanik.jpg")
       },
       {
         name: "Saisab Sadhu",
         research: "Overcoming Imperfect Retrieval Augmentation and Knowledge Conflicts in RAG Frameworks",
         email: "saisa21@iiserb.ac.in",
+        linkedin: 'https://www.linkedin.com/in/saisab-sadhu/',
+        scholarProfile:'https://scholar.google.com/citations?user=iGgIaLQAAAAJ&hl=en',
         image: getImagePath("saisab.jpg")
       },
       {
         name: "Ashim Dhor",
         research: "Deep Learning for Histopathology Image Analysis",
         email: "ashim21@iiserb.ac.in",
+        linkedin:'https://www.linkedin.com/in/ashim-dhor/',
         scholarProfile: "https://scholar.google.com/citations?user=KnN80Q4AAAAJ&hl=en",
         image: getImagePath("ashim.jpg")
       },
@@ -81,6 +93,7 @@ export default function Team() {
         name: "Himadri Sonowal",
         research: "Legal Text Summarization",
         email: "himadri20@iiserb.ac.in",
+        linkedin:'https://www.linkedin.com/in/himadri-sonowal-9b5067202/',
         image: getImagePath("himadri.jpg")
       }
     ],
@@ -211,12 +224,16 @@ export default function Team() {
                   <h3 className="text-lg font-semibold">{scholar.name}</h3>
                   <p className="text-gray-600 mb-2">{scholar.research}</p>
                   <div className="flex gap-4">
-                    <a 
-                      href={`mailto:${scholar.email}`}
-                      className="text-blue-600 hover:text-blue-800"
-                    >
-                      Email
-                    </a>
+                    {scholar.linkedin && (
+                      <a 
+                        href={scholar.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-800"
+                      >
+                        LinkedIn
+                      </a>
+                    )}
                     {scholar.scholarProfile && (
                       <a 
                         href={scholar.scholarProfile}
@@ -225,16 +242,6 @@ export default function Team() {
                         className="text-blue-600 hover:text-blue-800"
                       >
                         Scholar
-                      </a>
-                    )}
-                    {scholar.linkedIn && (
-                      <a 
-                        href={scholar.linkedIn}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800"
-                      >
-                        LinkedIn
                       </a>
                     )}
                   </div>
@@ -267,12 +274,16 @@ export default function Team() {
                   <h3 className="text-lg font-semibold">{student.name}</h3>
                   <p className="text-gray-600 mb-2">{student.research}</p>
                   <div className="flex gap-4">
-                    <a 
-                      href={`mailto:${student.email}`}
-                      className="text-blue-600 hover:text-blue-800"
-                    >
-                      Email
-                    </a>
+                    {student.linkedin && (
+                      <a 
+                        href={student.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-800"
+                      >
+                        LinkedIn
+                      </a>
+                    )}
                     {student.scholarProfile && (
                       <a 
                         href={student.scholarProfile}

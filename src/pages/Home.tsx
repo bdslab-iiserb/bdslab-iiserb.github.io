@@ -89,54 +89,54 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center">
+      <section className="relative min-h-screen flex items-center justify-center py-20">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black opacity-75"></div>
           <AnimatePresence mode="wait">
             <motion.div
               key={currentImageIndex}
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.3 }} 
+              animate={{ opacity: 1 }} 
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.8 }}
               className="w-full h-full"
             >
               <img
                 src={backgroundImages[currentImageIndex]}
                 alt="Background"
-                className="w-full h-full object-cover blur-sm" 
+                className="w-full h-full object-cover brightness-110 contrast-105" 
                 loading="eager"
               />
             </motion.div>
           </AnimatePresence>
+          <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-blue-50/50 to-cyan-50/60 backdrop-blur-[2px]"></div>
         </div>
         
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="bg-black/50 backdrop-blur-md rounded-2xl p-8 shadow-xl" 
+            className="bg-white/95 backdrop-blur-xl rounded-3xl p-12 shadow-2xl border border-blue-100" 
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
-              <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-500 bg-clip-text text-transparent">
                 Biomedical Data Science Lab
               </span>
             </h1>
-            <p className="text-xl md:text-2xl font-semibold text-gray-100 mb-8 tracking-wide">
+            <p className="text-xl md:text-2xl font-semibold text-gray-700 mb-8 tracking-wide">
               Indian Institute of Science Education and Research{' '}
-              <span className="text-blue-300 font-bold">(IISER)</span>{' '}
-              <span className="text-blue-400 font-bold">Bhopal</span>
+              <span className="text-blue-600 font-bold">(IISER)</span>{' '}
+              <span className="text-cyan-600 font-bold">Bhopal</span>
             </p>            
-            <p className="text-lg md:text-xl text-gray-200 mb-12 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
               Advancing healthcare through artificial intelligence and data science innovations. 
               Our research focuses on medical imaging, clinical text analysis, and biomedical literature mining.
             </p>
             <button 
               onClick={() => navigate('/research')}
-              className="group bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg transition-all duration-300 flex items-center gap-2 mx-auto text-lg"
+              className="group bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-10 py-4 rounded-xl transition-all duration-300 flex items-center gap-2 mx-auto text-lg font-semibold shadow-lg hover:shadow-xl"
             >
               Explore Our Research
               <ArrowRight className="group-hover:translate-x-1 transition-transform" />
@@ -146,11 +146,16 @@ export default function Home() {
       </section>
 
       {/* Research Focus Areas */}
-      <section className="py-20 px-4 bg-gray-50">
+      <section className="py-24 px-4 bg-gradient-to-b from-white to-blue-50">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            Research Focus Areas
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-6">
+            <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+              Research Focus Areas
+            </span>
           </h2>
+          <p className="text-center text-gray-600 mb-16 text-lg max-w-3xl mx-auto">
+            Pioneering AI-driven solutions for complex biomedical challenges
+          </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {focusAreas.map((area, index) => (
@@ -159,13 +164,13 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all cursor-pointer"
+                className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all cursor-pointer border border-blue-100 hover:border-blue-300 group"
                 onClick={() => setSelectedArea(index)}
               >
-                <div className="text-blue-600 mb-4">{area.icon}</div>
-                <h3 className="text-xl font-bold mb-3">{area.title}</h3>
-                <p className="text-gray-600 line-clamp-3">{area.description}</p>
-                <button className="mt-4 text-blue-600 hover:text-blue-800">
+                <div className="text-blue-600 mb-4 group-hover:scale-110 transition-transform">{area.icon}</div>
+                <h3 className="text-xl font-bold mb-3 text-gray-800 group-hover:text-blue-600 transition-colors">{area.title}</h3>
+                <p className="text-gray-600 line-clamp-3 leading-relaxed">{area.description}</p>
+                <button className="mt-4 text-blue-600 hover:text-cyan-600 font-semibold transition-colors">
                   Learn more →
                 </button>
               </motion.div>
@@ -185,19 +190,19 @@ export default function Home() {
       </section>
 
       {/* News Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-blue-50 to-white">
+      <section className="py-24 px-4 bg-gradient-to-br from-blue-50 via-cyan-50 to-white">
         <div className="max-w-6xl mx-auto">
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-center mb-4"
+            className="text-4xl md:text-5xl font-bold text-center mb-6"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
               Latest News
             </span>
           </motion.h2>
-          <p className="text-center text-gray-600 mb-12 text-lg">Recent achievements and updates from our lab</p>
+          <p className="text-center text-gray-600 mb-16 text-lg max-w-3xl mx-auto">Recent achievements and updates from our lab</p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
@@ -205,13 +210,15 @@ export default function Home() {
                 title: "Paper Accepted at Artificial Intelligence and Medicine Journal",
                 description: "Congratulations to Prateek and team!",
                 icon: "🎉",
-                gradient: "from-blue-500 to-blue-600"
+                gradient: "from-blue-500 to-blue-600",
+                link: "https://www.sciencedirect.com/science/article/pii/S0933365725002593"
               },
               {
                 title: "Paper Accepted at Neuroscience Informatics Journal",
                 description: "Congratulations to Srutanik and team!",
                 icon: "🧠",
-                gradient: "from-purple-500 to-purple-600"
+                gradient: "from-purple-500 to-purple-600",
+                link: "https://www.sciencedirect.com/science/article/pii/S2772528625000585"
               },
               {
                 title: "AAAI-2026 Student Abstract Accepted",
@@ -229,49 +236,74 @@ export default function Home() {
                 title: "Paper Accepted at FinNLP @ EMNLP 2025",
                 description: "Congratulations to Saisab!",
                 icon: "💼",
-                gradient: "from-orange-500 to-orange-600"
+                gradient: "from-orange-500 to-orange-600",
+                link: "https://aclanthology.org/2025.finnlp-2.21.pdf"
               }
-            ].map((news, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
-              >
-                {/* Gradient top border */}
-                <div className={`h-1.5 bg-gradient-to-r ${news.gradient}`}></div>
-                
-                <div className="p-6">
-                  {/* Icon */}
-                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {news.icon}
-                  </div>
-                  
-                  {/* Title */}
-                  <h3 className="text-lg font-bold text-gray-800 mb-3 leading-tight">
-                    {news.title}
-                  </h3>
-                  
-                  {/* Description */}
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {news.description}
-                  </p>
-                </div>
+            ].map((news, index) => {
+              const NewsWrapper = news.link ? 'a' : 'div';
+              const wrapperProps = news.link ? {
+                href: news.link,
+                target: '_blank',
+                rel: 'noopener noreferrer',
+                className: 'block'
+              } : {};
+              
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className={`group relative bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-blue-100 hover:border-blue-300 ${news.link ? 'cursor-pointer' : ''}`}
+                >
+                  <NewsWrapper {...wrapperProps}>
+                    {/* Gradient top border */}
+                    <div className={`h-2 bg-gradient-to-r ${news.gradient}`}></div>
+                    
+                    <div className="p-6">
+                      {/* Icon */}
+                      <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                        {news.icon}
+                      </div>
+                      
+                      {/* Title */}
+                      <h3 className="text-lg font-bold text-gray-800 mb-3 leading-tight">
+                        {news.title}
+                      </h3>
+                      
+                      {/* Description */}
+                      <p className="text-gray-600 text-sm leading-relaxed">
+                        {news.description}
+                      </p>
+                      
+                      {/* Read more indicator for linked items */}
+                      {news.link && (
+                        <p className="text-blue-600 text-sm font-semibold mt-3 group-hover:text-cyan-600 transition-colors">
+                          Read Paper →
+                        </p>
+                      )}
+                    </div>
 
-                {/* Hover effect overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${news.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
-              </motion.div>
-            ))}
+                    {/* Hover effect overlay */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${news.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none`}></div>
+                  </NewsWrapper>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* Lab Videos Section */}
-      <section className="py-20 px-4">
+      <section className="py-24 px-4 bg-gradient-to-b from-white to-blue-50">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Media</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-6">
+            <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+              Media
+            </span>
+          </h2>
+          <p className="text-center text-gray-600 mb-16 text-lg">Watch our latest talks and lab tours</p>
           
           {/* Video container with navigation */}
           <div className="relative">
