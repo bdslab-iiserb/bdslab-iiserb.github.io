@@ -92,7 +92,7 @@ export default function Team() {
       },
       {
         name: "Ashim Dhor",
-        research: "Deep Learning for Histopathology Image Analysis",
+        research: "Computational Pathology: Deep Learning for Malignancies Detection Histopathology Image",
         email: "ashim21@iiserb.ac.in",
         linkedin:'https://www.linkedin.com/in/ashim-dhor/',
         scholarProfile: "https://scholar.google.com/citations?user=KnN80Q4AAAAJ&hl=en",
