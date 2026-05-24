@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'; // Make sure to remove "Blog" link fro
 import Home from './pages/Home';
 import Team from './pages/Team';
 import Research from './pages/Research';
+import Gallery from './pages/Gallery';
 // import Blog from './pages/Blog'; // REMOVED: Blog page is no longer used
 import Contact from './pages/Contact';
 
@@ -17,6 +18,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/team" element={<Team />} />
             <Route path="/research" element={<Research />} />
+            <Route path="/gallery" element={<Gallery />} />
             {/* <Route path="/blog" element={<Blog />} /> REMOVED: Blog route */}
             <Route path="/contact" element={<Contact />} />
           </Routes>
