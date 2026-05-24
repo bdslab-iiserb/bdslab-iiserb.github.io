@@ -2,20 +2,15 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, Github } from 'lucide-react';
-import { cn } from '../utils/cn'; // Assuming cn.ts exists in src/utils/
+import { cn } from '../utils/cn';
 
 // Define a function to get the correct image path
 function getImagePath(name: string): string {
-  // Correct path for GitHub Pages deployment
-  // If your images are in public/images, this path should work.
-  // If your project is hosted at a subpath like yourusername.github.io/my-repo/,
-  // you might need to adjust this, e.g., by prepending the repo name if not handled by the router.
-  // For a simple GitHub Pages site (not a sub-repo), `/images/` is usually correct.
   return `/images/${name}`;
 }
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false); // isScrolled is set but not used for styling in the provided code. Kept for potential future use.
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -31,6 +26,10 @@ export default function Navbar() {
     { path: '/', label: 'Home' },
     { path: '/team', label: 'Team' },
     { path: '/research', label: 'Research' },
+
+    // Added Gallery
+    { path: '/gallery', label: 'Gallery' },
+
     { path: 'https://github.com/bdslab-iiserb', label: 'GitHub', external: true },
     { path: '/contact', label: 'Contact' }
   ];
@@ -45,7 +44,10 @@ export default function Navbar() {
     >
       <div className="max-w-[95%] mx-auto">
         <div className="flex justify-between h-24 items-center">
+
+          {/* Left Section */}
           <div className="flex items-center space-x-4 pl-2">
+
             <a
               href="https://www.iiserb.ac.in/"
               target="_blank"
@@ -58,6 +60,7 @@ export default function Navbar() {
                 className="h-16 w-auto"
               />
             </a>
+
             <a
               href="https://dse.iiserb.ac.in/"
               target="_blank"
@@ -70,8 +73,9 @@ export default function Navbar() {
                 className="h-16 w-auto"
               />
             </a>
+
             <a
-              href="https://bdslab-iiserb.github.io" // Assuming this is the correct link for the lab itself
+              href="https://bdslab-iiserb.github.io"
               className="transition-transform duration-300 hover:scale-110"
             >
               <img
@@ -80,6 +84,7 @@ export default function Navbar() {
                 className="h-16 w-auto"
               />
             </a>
+
             <Link
               to="/"
               className="font-bold text-2xl tracking-tight text-gray-800 hover:text-blue-600 transition-colors duration-300"
@@ -134,6 +139,7 @@ export default function Navbar() {
         {isMenuOpen && (
           <div className="md:hidden bg-white shadow-lg rounded-b-xl border-t border-blue-200">
             <div className="px-2 pt-2 pb-3 space-y-1">
+
               {navLinks.map((link) => (
                 link.external ? (
                   <a
@@ -156,12 +162,13 @@ export default function Navbar() {
                         ? "bg-blue-100 text-blue-600 font-bold"
                         : "text-gray-700 hover:bg-blue-50"
                     )}
-                    onClick={() => setIsMenuOpen(false)} // Close menu on link click
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}
                   </Link>
                 )
               ))}
+
             </div>
           </div>
         )}
