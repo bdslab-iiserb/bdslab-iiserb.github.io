@@ -107,7 +107,7 @@ export default function Team() {
       },
 
     ],
-    mastersStudents: [
+    bachelorsStudents: [
       {
         name: "Soumyadeep Gope",
         research: "Multiple Sclerosis segmentation from Brain MRIs",
