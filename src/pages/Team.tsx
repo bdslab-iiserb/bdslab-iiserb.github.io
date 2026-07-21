@@ -107,6 +107,16 @@ export default function Team() {
       },
 
     ],
+    mastersStudents: [
+      {
+        name: "Soumyadeep Gope",
+        research: "Multiple Sclerosis segmentation from Brain MRIs",
+        email: "soumyadeep22@iiserb.ac.in",
+        linkedin:'https://www.linkedin.com/in/srutanik-bhaduri-3a9a691b9/',
+        scholarProfile:'http://scholar.google.com/citations?user=MhOwQT4AAAAJ&hl=en',
+        image: getImagePath("srutanik.jpg")
+      },
+    ]
     alumni: [
       {
         name: "Ramavath Tharun",
