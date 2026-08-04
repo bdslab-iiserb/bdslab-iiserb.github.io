@@ -1,5 +1,5 @@
 // src/App.tsx
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar'; // Make sure to remove "Blog" link from Navbar.tsx
 import Home from './pages/Home';
 import Team from './pages/Team';
@@ -10,23 +10,31 @@ import Courses from './pages/Courses';
 import AdvancedNLP from './pages/Courses/AdvancedNLP';
 import Contact from './pages/Contact';
 
-export default function App() {
+// Course detail pages (e.g. Advanced NLP) render as standalone academic
+// pages with their own header/footer, so the lab site's chrome is hidden
+// for any /courses/:slug route.
+const STANDALONE_ROUTE = /^\/courses\/[^/]+$/;
+
+function SiteShell() {
+  const location = useLocation();
+  const isStandalone = STANDALONE_ROUTE.test(location.pathname);
+
   return (
-    <Router>
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/team" element={<Team />} />
-            <Route path="/research" element={<Research />} />
-            <Route path="/gallery" element={<Gallery />} />
-            {/* <Route path="/blog" element={<Blog />} /> REMOVED: Blog route */}
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/courses/advanced-nlp" element={<AdvancedNLP />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </main>
+    <div className="min-h-screen flex flex-col">
+      {!isStandalone && <Navbar />}
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/research" element={<Research />} />
+          <Route path="/gallery" element={<Gallery />} />
+          {/* <Route path="/blog" element={<Blog />} /> REMOVED: Blog route */}
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/advanced-nlp" element={<AdvancedNLP />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
+      {!isStandalone && (
         <footer className="bg-gradient-to-r from-blue-900 via-blue-800 to-cyan-900 text-white py-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4">
@@ -42,7 +50,15 @@ export default function App() {
             </div>
           </div>
         </footer>
-      </div>
+      )}
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <SiteShell />
     </Router>
   );
 }

@@ -1,52 +1,27 @@
 // src/components/CoursePage.tsx
-// Generic renderer for a course. It renders everything from a
-// CourseInfo object, so adding a new course only means creating a
-// data file and a thin page (see src/pages/Courses/AdvancedNLP.tsx).
-import { motion } from 'framer-motion';
+// Standalone academic-style renderer for a course, deliberately kept
+// visually separate from the rest of the lab site (no shared Navbar,
+// no gradients/motion cards) so it reads like a self-contained course
+// page (in the spirit of Stanford/MIT OpenCourseWare pages) rather
+// than another section of the lab's marketing site.
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import {
-  ArrowLeft,
-  Award,
-  BookOpen,
-  Calendar,
-  CheckCircle2,
-  ClipboardList,
-  Clock,
-  ExternalLink,
-  FileText,
-  GraduationCap,
-  Layers,
-  Link2,
-  Mail,
-  Megaphone,
-  Target,
-  Users
-} from 'lucide-react';
+import { ArrowLeft, ExternalLink, Mail, UserRound } from 'lucide-react';
 import type { CourseInfo } from '../data/courses/advancedNlp';
-import { cn } from '../utils/cn';
 
-function SectionHeading({
-  icon,
-  title
-}: {
-  icon: React.ReactNode;
-  title: string;
-}) {
+function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-3">
-      <span className="text-blue-600">{icon}</span>
-      <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-        {title}
-      </span>
+    <h2 className="font-serif text-2xl font-semibold text-stone-900 border-b border-stone-200 pb-3 mb-6">
+      {children}
     </h2>
   );
 }
 
-const statusStyles: Record<string, string> = {
-  Open: 'bg-green-100 text-green-700 border-green-300',
-  Upcoming: 'bg-amber-100 text-amber-700 border-amber-300',
-  Closed: 'bg-gray-100 text-gray-600 border-gray-300'
+const tagLabel: Record<string, string> = {
+  core: 'Core',
+  lab: 'Hands-on',
+  key: 'Key session',
+  iiserb: 'IISERB focus'
 };
 
 export default function CoursePage({ course }: { course: CourseInfo }) {
@@ -56,75 +31,310 @@ export default function CoursePage({ course }: { course: CourseInfo }) {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  return (
-    <div className="pt-32 pb-16 px-4 bg-gradient-to-br from-blue-50 via-white to-cyan-50">
-      <div className="max-w-7xl mx-auto">
-        <Link
-          to="/courses"
-          className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium mb-8 transition-colors"
-        >
-          <ArrowLeft size={18} />
-          All Courses
-        </Link>
+  const totalSessions = course.phases.reduce((sum, phase) => sum + phase.sessions.length, 0);
 
+  const navItems = [
+    course.announcements.length > 0 && { id: 'announcements', label: 'Announcements' },
+    course.overview && { id: 'overview', label: 'Overview' },
+    (course.objectives.length > 0 || course.prerequisites.length > 0) && { id: 'objectives', label: 'Objectives' },
+    course.phases.length > 0 && { id: 'syllabus', label: 'Syllabus' },
+    course.assignments.length > 0 && { id: 'assignments', label: 'Assignments' },
+    course.grading.length > 0 && { id: 'grading', label: 'Grading' },
+    course.textbooks.length > 0 && { id: 'resources', label: 'Resources' },
+    { id: 'staff', label: 'Staff' }
+  ].filter(Boolean) as { id: string; label: string }[];
+
+  return (
+    <div className="min-h-screen bg-white text-stone-900">
+      {/* Minimal back-link bar, replaces the lab site's Navbar on this page */}
+      <div className="border-b border-stone-200">
+        <div className="max-w-4xl mx-auto px-6 py-3 flex items-center justify-between text-sm">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-1.5 text-stone-500 hover:text-stone-800 transition-colors"
+          >
+            <ArrowLeft size={14} />
+            BDS Lab, IISER Bhopal
+          </Link>
+          <span className="text-stone-400 hidden sm:inline">
+            Department of Data Science and Engineering
+          </span>
+        </div>
+      </div>
+
+      <div className="max-w-4xl mx-auto px-6">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-r from-blue-900 via-blue-700 to-cyan-700 text-white rounded-2xl p-8 md:p-12 shadow-2xl mb-12"
-        >
-          <div className="flex flex-wrap items-center gap-3 mb-4">
-            {course.code && (
-              <span className="inline-flex items-center gap-1 bg-white/15 backdrop-blur px-3 py-1 rounded-full text-sm font-semibold">
-                <GraduationCap size={16} />
-                {course.code}
-              </span>
-            )}
-            {course.semester && (
-              <span className="inline-flex items-center gap-1 bg-white/15 backdrop-blur px-3 py-1 rounded-full text-sm font-semibold">
-                <Calendar size={16} />
-                {course.semester}
-              </span>
-            )}
-            {course.credits && (
-              <span className="inline-flex items-center gap-1 bg-white/15 backdrop-blur px-3 py-1 rounded-full text-sm font-semibold">
-                <Award size={16} />
-                {course.credits} Credits
-              </span>
-            )}
-          </div>
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">{course.title}</h1>
+        <header className="pt-14 pb-10 border-b border-stone-200">
+          <p className="text-sm font-medium tracking-wide text-stone-500 uppercase mb-3">
+            {[course.code, course.semester].filter(Boolean).join(' · ') || 'Course'}
+          </p>
+          <h1 className="font-serif text-4xl md:text-5xl font-semibold leading-tight mb-5">
+            {course.title}
+          </h1>
           {course.shortDescription && (
-            <p className="text-white/90 text-lg md:text-xl max-w-4xl leading-relaxed">
+            <p className="text-lg text-stone-600 leading-relaxed max-w-3xl mb-6">
               {course.shortDescription}
             </p>
           )}
-        </motion.div>
+          {course.instructor.length > 0 && (
+            <p className="text-stone-700">
+              <span className="text-stone-500">Instructor:</span>{' '}
+              {course.instructor.map((person, index) => (
+                <span key={person.name}>
+                  {index > 0 && ', '}
+                  {person.website ? (
+                    <a
+                      href={person.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-stone-900 underline decoration-stone-300 underline-offset-4 hover:decoration-stone-600"
+                    >
+                      {person.name}
+                    </a>
+                  ) : (
+                    <span className="font-medium text-stone-900">{person.name}</span>
+                  )}
+                </span>
+              ))}
+            </p>
+          )}
+        </header>
 
-        {/* Instructor & TAs */}
-        {(course.instructor.length > 0 || course.teachingAssistants.length > 0) && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="mb-12"
-          >
-            <SectionHeading icon={<Users size={28} />} title="Instructor & Teaching Assistants" />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* In-page nav */}
+        <nav className="sticky top-0 bg-white/95 backdrop-blur border-b border-stone-200 py-3 flex flex-wrap gap-x-6 gap-y-1 text-sm z-10">
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className="text-stone-500 hover:text-stone-900 transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="py-12 space-y-16">
+          {/* Announcements */}
+          {course.announcements.length > 0 && (
+            <section id="announcements" className="scroll-mt-16">
+              <SectionTitle>Announcements</SectionTitle>
+              <div className="space-y-5">
+                {course.announcements.map((announcement, index) => (
+                  <div key={index} className="flex gap-4">
+                    <span className="text-sm text-stone-400 font-mono whitespace-nowrap pt-0.5">
+                      {announcement.date}
+                    </span>
+                    <p className="text-stone-700 leading-relaxed">{announcement.text}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Overview */}
+          {course.overview && (
+            <section id="overview" className="scroll-mt-16">
+              <SectionTitle>Overview</SectionTitle>
+              <p className="text-stone-700 leading-relaxed text-[17px]">{course.overview}</p>
+            </section>
+          )}
+
+          {/* Objectives & Prerequisites */}
+          {(course.objectives.length > 0 || course.prerequisites.length > 0) && (
+            <section id="objectives" className="scroll-mt-16 grid grid-cols-1 md:grid-cols-2 gap-12">
+              {course.objectives.length > 0 && (
+                <div>
+                  <h3 className="font-serif text-lg font-semibold mb-4">Learning Objectives</h3>
+                  <ul className="space-y-2.5">
+                    {course.objectives.map((objective, index) => (
+                      <li key={index} className="flex gap-3 text-stone-700 leading-relaxed">
+                        <span className="text-stone-300 select-none">—</span>
+                        <span>{objective}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {course.prerequisites.length > 0 && (
+                <div>
+                  <h3 className="font-serif text-lg font-semibold mb-4">Prerequisites</h3>
+                  <ul className="space-y-2.5">
+                    {course.prerequisites.map((prerequisite, index) => (
+                      <li key={index} className="flex gap-3 text-stone-700 leading-relaxed">
+                        <span className="text-stone-300 select-none">—</span>
+                        <span>{prerequisite}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </section>
+          )}
+
+          {/* Syllabus */}
+          {course.phases.length > 0 && (
+            <section id="syllabus" className="scroll-mt-16">
+              <SectionTitle>Syllabus</SectionTitle>
+              <p className="text-stone-500 text-sm mb-6">
+                {totalSessions} sessions across {course.phases.length} units. Expand a unit for session-by-session detail.
+              </p>
+              <div className="divide-y divide-stone-200 border-y border-stone-200">
+                {course.phases.map((phase) => (
+                  <details key={phase.id} className="group py-4" open={phase.core}>
+                    <summary className="flex items-center gap-3 cursor-pointer list-none">
+                      <span
+                        className={
+                          'flex-shrink-0 text-xs font-mono w-6 h-6 rounded-full flex items-center justify-center border ' +
+                          (phase.core
+                            ? 'border-red-900 text-red-900'
+                            : 'border-stone-300 text-stone-500')
+                        }
+                      >
+                        {phase.id}
+                      </span>
+                      <span className="font-serif text-lg font-medium text-stone-900 flex-1">
+                        {phase.label}
+                      </span>
+                      {phase.core && (
+                        <span className="text-xs font-medium text-red-900 border border-red-900/40 rounded-full px-2 py-0.5">
+                          Core focus
+                        </span>
+                      )}
+                      <span className="text-sm text-stone-400 whitespace-nowrap">
+                        {phase.sessions.length} session{phase.sessions.length !== 1 ? 's' : ''}
+                      </span>
+                      <span className="text-stone-400 transition-transform group-open:rotate-90">›</span>
+                    </summary>
+                    {phase.note && (
+                      <p className="text-sm text-stone-500 italic mt-2 ml-9">{phase.note}</p>
+                    )}
+                    <ol className="mt-4 ml-9 space-y-4">
+                      {phase.sessions.map((session) => (
+                        <li key={session.code} className="flex gap-4">
+                          <span className="text-xs font-mono text-stone-400 pt-0.5 whitespace-nowrap">
+                            {session.code}
+                          </span>
+                          <div>
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="font-medium text-stone-900">{session.title}</span>
+                              {session.tag && (
+                                <span className="text-[11px] uppercase tracking-wide text-stone-500 border border-stone-300 rounded px-1.5 py-0.5">
+                                  {tagLabel[session.tag] ?? session.tag}
+                                </span>
+                              )}
+                            </div>
+                            {session.detail && (
+                              <p className="text-stone-600 text-sm leading-relaxed mt-1">{session.detail}</p>
+                            )}
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
+                  </details>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Assignments */}
+          {course.assignments.length > 0 && (
+            <section id="assignments" className="scroll-mt-16">
+              <SectionTitle>Assignments</SectionTitle>
+              <div className="divide-y divide-stone-200 border-y border-stone-200">
+                {course.assignments.map((assignment, index) => (
+                  <div key={index} className="py-4 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-4">
+                    <div className="md:w-24 flex-shrink-0 text-xs uppercase tracking-wide text-stone-500">
+                      {assignment.status}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-baseline gap-3 flex-wrap">
+                        <span className="font-medium text-stone-900">{assignment.title}</span>
+                        {assignment.dueDate && (
+                          <span className="text-sm text-stone-500">Due {assignment.dueDate}</span>
+                        )}
+                        {assignment.link && (
+                          <a
+                            href={assignment.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-sm text-blue-900 hover:underline"
+                          >
+                            <ExternalLink size={12} />
+                            View
+                          </a>
+                        )}
+                      </div>
+                      {assignment.description && (
+                        <p className="text-stone-600 text-sm leading-relaxed mt-1">{assignment.description}</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Grading */}
+          {course.grading.length > 0 && (
+            <section id="grading" className="scroll-mt-16">
+              <SectionTitle>Grading</SectionTitle>
+              <table className="w-full max-w-md text-left">
+                <tbody className="divide-y divide-stone-200">
+                  {course.grading.map((item, index) => (
+                    <tr key={index}>
+                      <td className="py-2.5 text-stone-700">{item.component}</td>
+                      <td className="py-2.5 text-stone-900 font-medium text-right">{item.weight}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          )}
+
+          {/* Resources */}
+          {course.textbooks.length > 0 && (
+            <section id="resources" className="scroll-mt-16">
+              <SectionTitle>Textbooks &amp; Resources</SectionTitle>
+              <ul className="space-y-3">
+                {course.textbooks.map((book, index) => (
+                  <li key={index}>
+                    {book.link ? (
+                      <a
+                        href={book.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-900 hover:underline font-medium"
+                      >
+                        {book.title}
+                      </a>
+                    ) : (
+                      <span className="font-medium text-stone-900">{book.title}</span>
+                    )}
+                    {book.authors && <span className="text-stone-500"> — {book.authors}</span>}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {/* Staff */}
+          <section id="staff" className="scroll-mt-16">
+            <SectionTitle>Staff</SectionTitle>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
               {course.instructor.map((person) => (
-                <div
-                  key={person.name}
-                  className="bg-white p-6 rounded-2xl shadow-lg border border-blue-100"
-                >
-                  <h3 className="text-lg font-bold text-gray-800 mb-1">{person.name}</h3>
-                  {person.title && <p className="text-gray-600 text-sm mb-3">{person.title}</p>}
-                  <div className="flex flex-wrap gap-3 mt-2">
+                <div key={person.name}>
+                  <div className="w-16 h-16 rounded-full bg-stone-100 border border-stone-200 flex items-center justify-center mb-3">
+                    <UserRound className="text-stone-400" size={28} />
+                  </div>
+                  <p className="font-medium text-stone-900">{person.name}</p>
+                  {person.title && <p className="text-sm text-stone-500 mb-2">{person.title}</p>}
+                  <div className="flex flex-wrap gap-3 text-sm">
                     {person.email && (
                       <a
                         href={`mailto:${person.email}`}
-                        className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm font-medium"
+                        className="inline-flex items-center gap-1 text-blue-900 hover:underline"
                       >
-                        <Mail size={14} />
+                        <Mail size={13} />
                         Email
                       </a>
                     )}
@@ -133,346 +343,59 @@ export default function CoursePage({ course }: { course: CourseInfo }) {
                         href={person.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm font-medium"
+                        className="inline-flex items-center gap-1 text-blue-900 hover:underline"
                       >
-                        <ExternalLink size={14} />
+                        <ExternalLink size={13} />
                         Website
                       </a>
                     )}
                   </div>
                 </div>
               ))}
-              {course.teachingAssistants.map((ta) => (
-                <div
-                  key={ta.name}
-                  className="bg-white p-6 rounded-2xl shadow-lg border border-blue-100"
-                >
-                  <h3 className="text-lg font-bold text-gray-800 mb-1">{ta.name}</h3>
-                  {ta.role && <p className="text-gray-600 text-sm mb-3">{ta.role}</p>}
+              {course.teachingAssistants.map((ta, index) => (
+                <div key={`${ta.name}-${index}`}>
+                  <div className="w-16 h-16 rounded-full bg-stone-100 border border-stone-200 flex items-center justify-center mb-3">
+                    <UserRound className="text-stone-300" size={28} />
+                  </div>
+                  <p className={'font-medium ' + (ta.placeholder ? 'text-stone-400 italic' : 'text-stone-900')}>
+                    {ta.name}
+                  </p>
+                  {ta.role && <p className="text-sm text-stone-500 mb-2">{ta.role}</p>}
                   {ta.email && (
                     <a
                       href={`mailto:${ta.email}`}
-                      className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm font-medium"
+                      className="inline-flex items-center gap-1 text-sm text-blue-900 hover:underline"
                     >
-                      <Mail size={14} />
+                      <Mail size={13} />
                       Email
                     </a>
                   )}
                 </div>
               ))}
             </div>
-          </motion.section>
-        )}
+          </section>
 
-        {/* Announcements */}
-        {course.announcements.length > 0 && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15 }}
-            className="mb-12"
-          >
-            <SectionHeading icon={<Megaphone size={28} />} title="Announcements" />
-            <div className="space-y-4">
-              {course.announcements.map((announcement, index) => (
-                <div
-                  key={index}
-                  className="bg-white p-6 rounded-2xl shadow-lg border-l-4 border-blue-600"
-                >
-                  <p className="text-sm text-gray-500 mb-2">{announcement.date}</p>
-                  <p className="text-gray-800 leading-relaxed">{announcement.text}</p>
-                </div>
-              ))}
-            </div>
-          </motion.section>
-        )}
-
-        {/* Overview */}
-        {course.overview && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="mb-12"
-          >
-            <SectionHeading icon={<BookOpen size={28} />} title="Course Overview" />
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-blue-100">
-              <p className="text-gray-700 leading-relaxed text-lg">{course.overview}</p>
-            </div>
-          </motion.section>
-        )}
-
-        {/* Objectives & Prerequisites */}
-        {(course.objectives.length > 0 || course.prerequisites.length > 0) && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25 }}
-            className="mb-12"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {course.objectives.length > 0 && (
-                <div className="bg-white p-8 rounded-2xl shadow-lg border border-blue-100">
-                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-800">
-                    <Target className="text-blue-600" size={22} />
-                    Learning Objectives
-                  </h3>
-                  <ul className="space-y-3">
-                    {course.objectives.map((objective, index) => (
-                      <li key={index} className="flex items-start gap-2 text-gray-700">
-                        <CheckCircle2 className="text-green-500 mt-0.5 flex-shrink-0" size={18} />
-                        <span>{objective}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              {course.prerequisites.length > 0 && (
-                <div className="bg-white p-8 rounded-2xl shadow-lg border border-blue-100">
-                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-800">
-                    <Layers className="text-blue-600" size={22} />
-                    Prerequisites
-                  </h3>
-                  <ul className="space-y-3">
-                    {course.prerequisites.map((prerequisite, index) => (
-                      <li key={index} className="flex items-start gap-2 text-gray-700">
-                        <CheckCircle2 className="text-blue-500 mt-0.5 flex-shrink-0" size={18} />
-                        <span>{prerequisite}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          </motion.section>
-        )}
-
-        {/* Schedule */}
-        {course.schedule.length > 0 && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="mb-12"
-          >
-            <SectionHeading icon={<Clock size={28} />} title="Schedule & Lectures" />
-            <div className="bg-white rounded-2xl shadow-lg border border-blue-100 overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-blue-50">
-                    <tr>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-blue-800 uppercase tracking-wide">
-                        Week
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-blue-800 uppercase tracking-wide">
-                        Topic
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-blue-800 uppercase tracking-wide">
-                        Details
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-bold text-blue-800 uppercase tracking-wide">
-                        Materials
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-100">
-                    {course.schedule.map((lecture, index) => (
-                      <tr key={index} className="hover:bg-blue-50/50 transition-colors">
-                        <td className="px-6 py-4 text-sm font-semibold text-gray-800 whitespace-nowrap">
-                          {lecture.week}
-                          {lecture.date && (
-                            <div className="text-xs text-gray-500 font-normal">{lecture.date}</div>
-                          )}
-                        </td>
-                        <td className="px-6 py-4 text-sm font-medium text-gray-800">{lecture.topic}</td>
-                        <td className="px-6 py-4 text-sm text-gray-600">
-                          {lecture.description || '-'}
-                        </td>
-                        <td className="px-6 py-4 text-sm">
-                          <div className="flex flex-col gap-1">
-                            {lecture.slides && (
-                              <a
-                                href={lecture.slides}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 font-medium"
-                              >
-                                <FileText size={14} />
-                                Slides
-                              </a>
-                            )}
-                            {lecture.reading && (
-                              <a
-                                href={lecture.reading}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-cyan-600 hover:text-cyan-800 font-medium"
-                              >
-                                <Link2 size={14} />
-                                Reading
-                              </a>
-                            )}
-                            {!lecture.slides && !lecture.reading && <span className="text-gray-400">-</span>}
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </motion.section>
-        )}
-
-        {/* Assignments */}
-        {course.assignments.length > 0 && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35 }}
-            className="mb-12"
-          >
-            <SectionHeading icon={<ClipboardList size={28} />} title="Assignments" />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {course.assignments.map((assignment, index) => (
-                <div
-                  key={index}
-                  className="bg-white p-6 rounded-2xl shadow-lg border border-blue-100 flex flex-col"
-                >
-                  <div className="flex items-start justify-between gap-3 mb-3">
-                    <h3 className="text-lg font-bold text-gray-800">{assignment.title}</h3>
-                    <span
-                      className={cn(
-                        'flex-shrink-0 text-xs font-bold px-3 py-1 rounded-full border',
-                        statusStyles[assignment.status]
-                      )}
-                    >
-                      {assignment.status}
-                    </span>
-                  </div>
-                  {assignment.description && (
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4 flex-grow">
-                      {assignment.description}
-                    </p>
-                  )}
-                  <div className="flex flex-col gap-2">
-                    {assignment.dueDate && (
-                      <p className="text-sm text-gray-500 flex items-center gap-1">
-                        <Clock size={14} />
-                        Due: {assignment.dueDate}
-                      </p>
-                    )}
-                    {assignment.link && (
-                      <a
-                        href={assignment.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 font-medium text-sm"
-                      >
-                        <ExternalLink size={14} />
-                        View Assignment
-                      </a>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.section>
-        )}
-
-        {/* Grading */}
-        {course.grading.length > 0 && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="mb-12"
-          >
-            <SectionHeading icon={<Award size={28} />} title="Grading Scheme" />
-            <div className="bg-white rounded-2xl shadow-lg border border-blue-100 overflow-hidden max-w-2xl">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-blue-50">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-sm font-bold text-blue-800 uppercase tracking-wide">
-                      Component
-                    </th>
-                    <th className="px-6 py-4 text-left text-sm font-bold text-blue-800 uppercase tracking-wide">
-                      Weight
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100">
-                  {course.grading.map((item, index) => (
-                    <tr key={index} className="hover:bg-blue-50/50 transition-colors">
-                      <td className="px-6 py-4 text-sm font-medium text-gray-800">{item.component}</td>
-                      <td className="px-6 py-4 text-sm font-semibold text-blue-600">{item.weight}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </motion.section>
-        )}
-
-        {/* Textbooks & Resources */}
-        {course.textbooks.length > 0 && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45 }}
-            className="mb-12"
-          >
-            <SectionHeading icon={<BookOpen size={28} />} title="Textbooks & Resources" />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {course.textbooks.map((book, index) => (
-                <div
-                  key={index}
-                  className="bg-white p-6 rounded-2xl shadow-lg border border-blue-100"
-                >
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">{book.title}</h3>
-                  {book.authors && <p className="text-gray-600 text-sm mb-4">{book.authors}</p>}
-                  {book.link && (
-                    <a
-                      href={book.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 font-medium text-sm"
-                    >
-                      <ExternalLink size={14} />
-                      Open Resource
-                    </a>
-                  )}
-                </div>
-              ))}
-            </div>
-          </motion.section>
-        )}
-
-        {/* Contact */}
-        {course.contactEmail && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="bg-gradient-to-r from-blue-900 via-blue-700 to-cyan-700 text-white rounded-2xl p-8 md:p-12 shadow-2xl"
-          >
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 flex items-center gap-3">
-              <Mail className="text-cyan-300" size={28} />
-              Course Queries
-            </h2>
-            <p className="text-white/90 mb-6">
-              For course related questions, reach out to the course team.
-            </p>
-            <a
-              href={`mailto:${course.contactEmail}`}
-              className="inline-flex items-center gap-2 bg-white text-blue-700 px-6 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-colors"
-            >
-              <Mail size={18} />
-              {course.contactEmail}
-            </a>
-          </motion.section>
-        )}
+          {/* Contact */}
+          {course.contactEmail && (
+            <section className="border-t border-stone-200 pt-8 pb-4 text-sm text-stone-500">
+              For course-related queries, contact{' '}
+              <a href={`mailto:${course.contactEmail}`} className="text-blue-900 hover:underline">
+                {course.contactEmail}
+              </a>
+              .
+            </section>
+          )}
+        </div>
       </div>
+
+      <footer className="border-t border-stone-200 py-8 mt-4">
+        <div className="max-w-4xl mx-auto px-6 text-sm text-stone-400 flex flex-col sm:flex-row justify-between gap-2">
+          <span>Biomedical Data Science Lab · IISER Bhopal</span>
+          <Link to="/courses" className="hover:text-stone-700 transition-colors">
+            All courses →
+          </Link>
+        </div>
+      </footer>
     </div>
   );
 }
