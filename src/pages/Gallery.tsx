@@ -38,7 +38,7 @@ export default function Gallery() {
     },
     {
       image: getImagePath('ECIR.jpeg'),
-      caption: 'Presentation of Saisab's paper at ECIR 2026 Conference by Dr. Dwaipayan Roy',
+      caption: 'Presentation of Saisab\'s paper at ECIR 2026 Conference by Dr. Dwaipayan Roy',
     },
     {
       image: getImagePath('himadri_defense.jpeg'),
@@ -50,7 +50,7 @@ export default function Gallery() {
     },
     {
       image: getImagePath('ISBI_TanmaySir.jpg'),
-      caption: 'Presentation at of Ashim's paper at ISBI 2026 Conference',
+      caption: 'Presentation at of Ashim\'s paper at ISBI 2026 Conference',
     },
     {
       image: getImagePath('Lab_dinner_Dec.jpg'),
@@ -62,7 +62,7 @@ export default function Gallery() {
     },
     {
       image: getImagePath('Saisab_Prateek_BP.jpg'),
-      caption: 'Saisab's and Prateek's Birthday Celebration',
+      caption: 'Saisab\'s and Prateek\'s Birthday Celebration',
     },
     {
       image: getImagePath('Thesis_Defended_BS-MS.jpg'),

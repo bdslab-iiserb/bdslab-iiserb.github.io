@@ -116,7 +116,7 @@ export default function Team() {
         scholarProfile:'http://scholar.google.com/citations?user=MhOwQT4AAAAJ&hl=en',
         image: getImagePath("srutanik.jpg")
       },
-    ]
+    ],
     alumni: [
       {
         name: "Ramavath Tharun",

@@ -6,6 +6,8 @@ import Team from './pages/Team';
 import Research from './pages/Research';
 import Gallery from './pages/Gallery';
 // import Blog from './pages/Blog'; // REMOVED: Blog page is no longer used
+import Courses from './pages/Courses';
+import AdvancedNLP from './pages/Courses/AdvancedNLP';
 import Contact from './pages/Contact';
 
 export default function App() {
@@ -20,6 +22,8 @@ export default function App() {
             <Route path="/research" element={<Research />} />
             <Route path="/gallery" element={<Gallery />} />
             {/* <Route path="/blog" element={<Blog />} /> REMOVED: Blog route */}
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/courses/advanced-nlp" element={<AdvancedNLP />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>

@@ -30,6 +30,9 @@ export default function Navbar() {
     // Added Gallery
     { path: '/gallery', label: 'Gallery' },
 
+    // Courses link opens the Advanced NLP course page directly
+    { path: '/courses/advanced-nlp', label: 'Courses' },
+
     { path: 'https://github.com/bdslab-iiserb', label: 'GitHub', external: true },
     { path: '/contact', label: 'Contact' }
   ];
