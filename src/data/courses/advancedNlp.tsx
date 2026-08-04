@@ -6,6 +6,10 @@
 // keep the data shapes valid (booleans stay true/false, numbers
 // stay numbers, strings stay strings). Empty strings or empty
 // arrays hide the corresponding section from the page.
+//
+// Session `slides` / `reading` links are intentionally left empty
+// until the material exists — add the URL as each session happens
+// and the link appears on the page automatically.
 // ============================================================
 
 export interface CourseInstructor {
@@ -27,6 +31,14 @@ export interface CourseSession {
   title: string;
   detail?: string;
   tag?: 'core' | 'lab' | 'key' | 'iiserb';
+  slides?: string;
+  reading?: string;
+}
+
+export interface CourseTrack {
+  id: string;
+  label: string;
+  color: string;
 }
 
 export interface CoursePhase {
@@ -34,6 +46,7 @@ export interface CoursePhase {
   label: string;
   note?: string;
   core?: boolean;
+  track: string;
   sessions: CourseSession[];
 }
 
@@ -68,11 +81,13 @@ export interface CourseInfo {
   code?: string;
   semester?: string;
   credits?: string;
+  advancedNote?: string;
   instructor: CourseInstructor[];
   teachingAssistants: CourseAssistant[];
   overview: string;
   objectives: string[];
   prerequisites: string[];
+  tracks: CourseTrack[];
   phases: CoursePhase[];
   assignments: CourseAssignment[];
   grading: GradingComponent[];
@@ -84,11 +99,13 @@ export interface CourseInfo {
 export const advancedNlpCourse: CourseInfo = {
   slug: 'advanced-nlp',
   title: 'Advanced Natural Language Processing',
-  code: '',
+  code: 'DSE425',
   semester: 'Monsoon 2026',
-  credits: '',
+  credits: '4',
   shortDescription:
     'A 30-session graduate course tracing NLP from its rule-based origins through statistical and neural methods to attention, Transformers, large language models and agentic systems, with a dedicated focus on Indic and low-resource NLP.',
+  advancedNote:
+    'DSE425 is an advanced-level course. It assumes prior exposure to introductory NLP, and the pace reflects that — we go deep into the mathematics, architectures and implementation details rather than staying at a survey level, especially for attention and Transformers.',
   instructor: [
     {
       name: 'Dr. Tanmay Basu',
@@ -113,16 +130,25 @@ export const advancedNlpCourse: CourseInfo = {
     'Critically read and reproduce recent NLP research.'
   ],
   prerequisites: [
+    'An introductory course in Natural Language Processing, or equivalent prior exposure — this is an advanced course and builds directly on those basics.',
     'Python programming (numpy, pandas).',
     'Basics of machine learning (supervised learning, evaluation).',
     'Basic probability, linear algebra and calculus.',
     'Familiarity with PyTorch is helpful but not required.'
+  ],
+  tracks: [
+    { id: 'foundations', label: 'Foundations', color: '#2a78d6' },
+    { id: 'attention', label: 'Attention & Transformers', color: '#1baf7a' },
+    { id: 'scale', label: 'Pretraining & Prompting', color: '#eda100' },
+    { id: 'tasks', label: 'Tasks & Indic NLP', color: '#008300' },
+    { id: 'frontier', label: 'Frontier Systems', color: '#4a3aa7' }
   ],
   phases: [
     {
       id: 'A',
       label: 'History of NLP',
       note: 'Full arc: rules → stats → neural → LLMs',
+      track: 'foundations',
       sessions: [
         {
           code: 'L1',
@@ -148,6 +174,7 @@ export const advancedNlpCourse: CourseInfo = {
       id: 'B',
       label: 'Foundations — Text, Tokens, Embeddings',
       note: 'Ground truth before the architectures',
+      track: 'foundations',
       sessions: [
         {
           code: 'L4',
@@ -173,6 +200,7 @@ export const advancedNlpCourse: CourseInfo = {
       id: 'C',
       label: 'Sequence Models — The Road to Attention',
       note: 'Context for why attention was invented',
+      track: 'foundations',
       sessions: [
         {
           code: 'L7',
@@ -193,6 +221,7 @@ export const advancedNlpCourse: CourseInfo = {
       label: 'Attention Mechanisms and Transformers',
       note: 'The heart of the course — 6 sessions',
       core: true,
+      track: 'attention',
       sessions: [
         {
           code: 'L9',
@@ -242,6 +271,7 @@ export const advancedNlpCourse: CourseInfo = {
       id: 'E',
       label: 'Pretraining at Scale',
       note: 'The paradigm shift: pretrain once, adapt everywhere',
+      track: 'scale',
       sessions: [
         {
           code: 'L15',
@@ -273,6 +303,7 @@ export const advancedNlpCourse: CourseInfo = {
       id: 'F',
       label: 'Prompting and In-Context Learning',
       note: 'Using LLMs without updating weights',
+      track: 'scale',
       sessions: [
         {
           code: 'L19',
@@ -292,6 +323,7 @@ export const advancedNlpCourse: CourseInfo = {
       id: 'G',
       label: 'Core NLP Tasks',
       note: 'What all this machinery is actually solving',
+      track: 'tasks',
       sessions: [
         {
           code: 'L21',
@@ -317,6 +349,7 @@ export const advancedNlpCourse: CourseInfo = {
       id: 'H',
       label: 'Indic and Low-Resource NLP',
       note: 'IISERB focus — Indian language NLP',
+      track: 'tasks',
       sessions: [
         {
           code: 'L24',
@@ -337,6 +370,7 @@ export const advancedNlpCourse: CourseInfo = {
       id: 'I',
       label: 'Advanced Modern Systems',
       note: 'Multimodal, efficient, and long-context LLMs',
+      track: 'frontier',
       sessions: [
         {
           code: 'L26',
@@ -356,6 +390,7 @@ export const advancedNlpCourse: CourseInfo = {
       id: 'J',
       label: 'RAG and Agentic Systems',
       note: 'The frontier: retrieve, reason, act',
+      track: 'frontier',
       sessions: [
         {
           code: 'L28',
@@ -381,34 +416,16 @@ export const advancedNlpCourse: CourseInfo = {
       ]
     }
   ],
+  // No real assignments exist yet — this section intentionally states that
+  // rather than inventing titles, topics or deadlines. Replace with actual
+  // CourseAssignment entries (title/dueDate/status/description/link) as they
+  // are created; the page renders whatever is here.
   assignments: [
     {
-      title: 'Assignment 1: Text Preprocessing and n-gram Models',
-      dueDate: '',
+      title: 'Assignments & Course Project',
       status: 'Upcoming',
-      description: 'Implement a text preprocessing pipeline and an n-gram language model with smoothing from scratch.',
-      link: ''
-    },
-    {
-      title: 'Assignment 2: Attention and Transformers from Scratch',
-      dueDate: '',
-      status: 'Upcoming',
-      description: 'Implement scaled dot-product and multi-head attention, and train a miniature Transformer language model.',
-      link: ''
-    },
-    {
-      title: 'Assignment 3: Fine-tuning and Adaptation',
-      dueDate: '',
-      status: 'Upcoming',
-      description: 'Fine-tune a pre-trained transformer (or apply LoRA) for a downstream task and compare with classical baselines.',
-      link: ''
-    },
-    {
-      title: 'Course Project',
-      dueDate: '',
-      status: 'Upcoming',
-      description: 'Group project applying modern NLP methods to a problem of choice, with a focus on Indic/biomedical text encouraged, culminating in a final presentation and report.',
-      link: ''
+      description:
+        'Nothing has been assigned yet. Individual assignment topics, deadlines and submission links, and the course project brief, will be posted here as they are released through the semester.'
     }
   ],
   grading: [
@@ -441,7 +458,7 @@ export const advancedNlpCourse: CourseInfo = {
   announcements: [
     {
       date: '2026-08-05',
-      text: 'Welcome to Advanced NLP. The syllabus below reflects the full 30-session plan; the schedule, staff list and materials will be filled in as the semester begins.'
+      text: 'Welcome to Advanced NLP (DSE425). The syllabus below reflects the full 30-session plan. Slides, readings, staff and assignments will be added here as the semester goes — this page will keep growing rather than shipping all at once.'
     }
   ],
   contactEmail: 'tanmay@iiserb.ac.in'
