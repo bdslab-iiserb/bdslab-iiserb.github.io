@@ -2,9 +2,6 @@ import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import PhotoCarousel from '../components/PhotoCarousel';
-import { li } from 'framer-motion/client';
-import { link } from 'fs';
-import { Linkedin } from 'lucide-react';
 
 // Define a function to get the correct image path
 function getImagePath(name: string): string {

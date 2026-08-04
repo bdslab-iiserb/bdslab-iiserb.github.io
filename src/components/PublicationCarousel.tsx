@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 
@@ -20,7 +20,6 @@ interface PublicationCarouselProps {
 export default function PublicationCarousel({ publications }: PublicationCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll effect
   useEffect(() => {

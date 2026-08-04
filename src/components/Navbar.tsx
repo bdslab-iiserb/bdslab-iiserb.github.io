@@ -1,5 +1,5 @@
 // src/components/Navbar.tsx
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, Github } from 'lucide-react';
 import { cn } from '../utils/cn';
@@ -10,17 +10,8 @@ function getImagePath(name: string): string {
 }
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const navLinks = [
     { path: '/', label: 'Home' },
