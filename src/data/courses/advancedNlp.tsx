@@ -100,7 +100,7 @@ export const advancedNlpCourse: CourseInfo = {
   slug: 'advanced-nlp',
   title: 'Advanced Natural Language Processing',
   code: 'DSE425',
-  semester: 'Monsoon 2026',
+  semester: '2026-27, Odd Semester',
   credits: '4',
   shortDescription:
     'A 30-session graduate course tracing NLP from its rule-based origins through statistical and neural methods to attention, Transformers, large language models and agentic systems, with a dedicated focus on Indic and low-resource NLP.',
