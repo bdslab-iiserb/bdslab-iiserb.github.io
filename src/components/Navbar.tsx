@@ -82,7 +82,7 @@ export default function Navbar() {
               className="transition-transform duration-300 hover:scale-110"
             >
               <img
-                src={getImagePath('biomedlab.jpg')}
+                src={getImagePath('biomedlab.png')}
                 alt="BDS Lab Logo"
                 className="h-16 w-auto"
               />
