@@ -429,9 +429,10 @@ export const advancedNlpCourse: CourseInfo = {
     }
   ],
   grading: [
-    { component: 'Assignments', weight: '30%' },
-    { component: 'Course Project', weight: '40%' },
-    { component: 'Final Examination', weight: '30%' }
+    { component: 'Midsem Examination', weight: '30%' },
+    { component: 'Endsem Examination', weight: '35%' },
+    { component: 'Quiz(zes)', weight: '5%' },
+    { component: 'Assignments & Course Project', weight: '30%' }
   ],
   textbooks: [
     {
