@@ -72,6 +72,20 @@ export default function Team() {
     ],
     mastersStudents: [
       {
+        name: "Soumyadeep Gope",
+        research: "Multiple Sclerosis segmentation from Brain MRIs",
+        email: "soumyadeep22@iiserb.ac.in",
+        linkedin:'https://www.linkedin.com/in/soumyadeep-gope-105298397/',
+        scholarProfile:'',
+        image: getImagePath("soumyadeep.jpg")
+      },
+      
+    ],
+    bachelorsStudents: [
+      
+    ],
+    alumni: [
+      {
         name: "Srutanik Bhaduri",
         research: "Semi-Supervised Learning and Domain Adaptation for Medical Image Analysis",
         email: "srutanik21@iiserb.ac.in",
@@ -103,18 +117,7 @@ export default function Team() {
         image: getImagePath("himadri.jpg")
       },
 
-    ],
-    bachelorsStudents: [
-      {
-        name: "Soumyadeep Gope",
-        research: "Multiple Sclerosis segmentation from Brain MRIs",
-        email: "soumyadeep22@iiserb.ac.in",
-        linkedin:'https://www.linkedin.com/in/srutanik-bhaduri-3a9a691b9/',
-        scholarProfile:'http://scholar.google.com/citations?user=MhOwQT4AAAAJ&hl=en',
-        image: getImagePath("srutanik.jpg")
-      },
-    ],
-    alumni: [
+
       {
         name: "Ramavath Tharun",
         current: "Currently Solutions Analyst at Nucleus Software",
