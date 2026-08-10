@@ -118,7 +118,7 @@ export default function Team() {
     alumni: [
       {
         name: "Srutanik Bhaduri",
-        research: "Semi-Supervised Learning and Domain Adaptation for Medical Image Analysis",
+        current: "AI Researcher at Oracle",
         email: "srutanik21@iiserb.ac.in",
         linkedin:'https://www.linkedin.com/in/srutanik-bhaduri-3a9a691b9/',
         scholarProfile:'http://scholar.google.com/citations?user=MhOwQT4AAAAJ&hl=en',
@@ -126,7 +126,7 @@ export default function Team() {
       },
       {
         name: "Saisab Sadhu",
-        research: "Overcoming Imperfect Retrieval Augmentation and Knowledge Conflicts in RAG Frameworks",
+        current: "AI Researcher at Lexsi Labs",
         email: "saisa21@iiserb.ac.in",
         linkedin: 'https://www.linkedin.com/in/saisab-sadhu/',
         scholarProfile:'https://scholar.google.com/citations?user=iGgIaLQAAAAJ&hl=en',
@@ -134,7 +134,7 @@ export default function Team() {
       },
       {
         name: "Ashim Dhor",
-        research: "Computational Pathology: Deep Learning for Malignancies Detection Histopathology Image",
+        current: "Computational Pathology: Deep Learning for Malignancies Detection Histopathology Image",
         email: "ashim21@iiserb.ac.in",
         linkedin:'https://www.linkedin.com/in/ashim-dhor/',
         scholarProfile: "https://scholar.google.com/citations?user=KnN80Q4AAAAJ&hl=en",
@@ -142,7 +142,7 @@ export default function Team() {
       },
       {
         name: "Himadri Sonowal",
-        research: "Legal Text Summarization",
+        current: "Legal Text Summarization",
         email: "himadri20@iiserb.ac.in",
         linkedin:'https://www.linkedin.com/in/himadri-sonowal-9b5067202/',
         image: getImagePath("himadri.jpg")
@@ -151,40 +151,41 @@ export default function Team() {
 
       {
         name: "Ramavath Tharun",
-        current: "Currently Solutions Analyst at Nucleus Software",
-        linkedIn: "https://www.linkedin.com/in/ramavath-tharun-493496263/",
+        current: "Solutions Analyst at Nucleus Software",
+        linkedin: "https://www.linkedin.com/in/ramavath-tharun-493496263/",
         email: "ramavath21@iiserb.ac.in",
         image: getImagePath("tharun.jpg")
       },
       {
         name: "Vishwaraj Chavan",
         email: "chavan21@iiserb.ac.in",
-        linkedIn: "https://www.linkedin.com/in/vishwarajchavan/",
+        linkedin: "https://www.linkedin.com/in/vishwarajchavan/",
         image: getImagePath("vishwaraj.jpg")
       },
       {
         name: "Ms Shraddha Agarwal",
-        current: "Currently MBA student at Indian Institute of Management Calcutta",
-        linkedIn: "https://in.linkedin.com/in/shraddha-agarwal-98743320a",
+        current: "Senior Associate, Boston Consulting Group (BCG)",
+        linkedin: "https://in.linkedin.com/in/shraddha-agarwal-98743320a",
         image: getImagePath("shraddha.jpg")
       },
       {
         name: "Ms. Archana Yadav",
-        current: "Currently Graduate Researcher at Stowers Institute for Medical Research USA",
+        current: "Machine Learning Engineer at BioSky",
+        linkedin: "https://www.linkedin.com/in/archana-yadav-iiserbhopal/",
         github: "https://github.com/A-2809",
         image: getImagePath("archana.jpg")
       },
       {
         name: "Mr. Hritik Bana",
-        current: "Currently pursuing PhD in Economics at Rice University USA",
-        linkedIn: "https://in.linkedin.com/in/hritik-bana",
+        current: "Graduate Student in Economics at Rice University USA",
+        linkedin: "https://in.linkedin.com/in/hritik-bana",
         image: getImagePath("hritik.jpg")
       },
       {
         name: "Mr. Anirban Tarafdar",
         current: "Assistant Professor, Amrita Vishwa Vidyapeetham, Faridabad",
         scholarProfile: "https://scholar.google.com/citations?user=LGvUz2sAAAAJ&hl=en",
-        linkedIn: "https://in.linkedin.com/in/anirban-dutta",
+        linkedin: "https://www.linkedin.com/in/anirban-tarafdar-787b2b101/",
         image: getImagePath("anirban.jpg")
       }
     ]
@@ -425,24 +426,14 @@ export default function Team() {
                   <h3 className="text-lg font-semibold">{alum.name}</h3>
                   <p className="text-gray-600 mb-2">{alum.current}</p>
                   <div className="flex gap-4">
-                    {alum.linkedIn && (
+                    {alum.linkedin && (
                       <a 
-                        href={alum.linkedIn}
+                        href={alum.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-600 hover:text-blue-800"
                       >
                         LinkedIn
-                      </a>
-                    )}
-                    {alum.github && (
-                      <a 
-                        href={alum.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800"
-                      >
-                        GitHub
                       </a>
                     )}
                   </div>
