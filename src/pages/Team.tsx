@@ -82,7 +82,38 @@ export default function Team() {
       
     ],
     bachelorsStudents: [
-      
+      {
+        name: "Ananya Preyasi",
+        research: "",
+        email: "ananya23@iiserb.ac.in",
+        linkedin: 'https://www.linkedin.com/in/ananya-preyasi-1b45ba340/',
+        scholarProfile: '',
+        image: getImagePath("ananya.jpeg")
+      },
+      {
+        name: "Dev Raj",
+        research: "",
+        email: "devraj23@iiserb.ac.in",
+        linkedin: 'https://www.linkedin.com/in/dev-raj-iiserb/',
+        scholarProfile: '',
+        image: getImagePath("devraj.png")
+      },
+      {
+        name: "Poorvai Chandrasen",
+        research: "",
+        email: "poorvai23@iiserb.ac.in",
+        linkedin: 'https://www.linkedin.com/in/poorvai-chandrasen/',
+        scholarProfile: '',
+        image: getImagePath("poorvai.jpeg")
+      },
+      {
+        name: "Shruti Wadatkar",
+        research: "",
+        email: "shruti23@iiserb.ac.in",
+        linkedin: 'https://www.linkedin.com/in/shruti-wadatkar-583b56281/',
+        scholarProfile: '',
+        image: getImagePath("shruti.jpeg")
+      }
     ],
     alumni: [
       {
@@ -323,7 +354,7 @@ export default function Team() {
 
         {/* Bachelor's Students Section */}
         <section className="mb-16">
-          <h2 className="text-2xl font-semibold mb-8">Master's Students</h2>
+          <h2 className="text-2xl font-semibold mb-8">Bachelor's Students</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {teamMembers.bachelorsStudents.map((student, index) => (
               <motion.div
