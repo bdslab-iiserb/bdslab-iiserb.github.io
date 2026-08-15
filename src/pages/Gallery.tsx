@@ -126,6 +126,20 @@ const galleryImages: Photo[] = [
     height: 3000,
   },
   {
+    image: getImagePath('ms-felicitation-saisab.jpeg'),
+    caption: 'Saisab receiving a memento at the felicitation of the MS students',
+    category: 'Milestones',
+    width: 1280,
+    height: 960,
+  },
+  {
+    image: getImagePath('ms-felicitation-srutanik.jpeg'),
+    caption: 'Srutanik receiving a memento at the felicitation of the MS students',
+    category: 'Milestones',
+    width: 1280,
+    height: 960,
+  },
+  {
     image: getImagePath('farewell-celebration.jpg'),
     caption: 'BDS Lab celebrating the passing out students',
     category: 'Milestones',
