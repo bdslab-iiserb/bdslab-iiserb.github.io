@@ -29,6 +29,22 @@ export default function Team() {
     },
     phdScholars: [
       {
+        name: "Pragati Agrawal",
+        research: "Recently Joined PhD Student",
+        email: "",
+        linkedin: '',
+        scholarProfile: "",
+        image: getImagePath("pragati.jpg")
+      },
+      {
+        name: "Nishtha Sharma",
+        research: "Recently Joined PhD Student",
+        email: "",
+        linkedin: '',
+        scholarProfile: "",
+        image: getImagePath("nishtha.jpg")
+      },
+      {
         name: "Mr. Prateek Sarangi",
         research: "Deep Learning for Radiotherapy Planning, Medical Image Segmentation",
         email: "prateek24@iiserb.ac.in",
@@ -68,22 +84,6 @@ export default function Team() {
         linkedin: '',
         scholarProfile: "",
         image: getImagePath("riya.jpeg")
-      },
-      {
-        name: "Nishtha Sharma",
-        research: "Recently Joined PhD Student",
-        email: "",
-        linkedin: '',
-        scholarProfile: "",
-        image: getImagePath("nishtha.jpg")
-      },
-      {
-        name: "Pragati Agrawal",
-        research: "Recently Joined PhD Student",
-        email: "",
-        linkedin: '',
-        scholarProfile: "",
-        image: getImagePath("pragati.jpg")
       }
     ],
     mastersStudents: [
