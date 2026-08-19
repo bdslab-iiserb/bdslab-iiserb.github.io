@@ -49,13 +49,6 @@ const galleryImages: Photo[] = [
     height: 1275,
   },
   {
-    image: getImagePath('ashim-aaai-2026.jpg'),
-    caption: 'Ashim presenting his paper at AAAI 2026, Singapore',
-    category: 'Conferences & Talks',
-    width: 1200,
-    height: 1600,
-  },
-  {
     image: getImagePath('ecir-2026-presentation.jpg'),
     caption: "Dr. Dwaipayan Roy presenting Saisab's paper at ECIR 2026",
     category: 'Conferences & Talks',
@@ -91,20 +84,6 @@ const galleryImages: Photo[] = [
     height: 1512,
   },
   {
-    image: getImagePath('ms-thesis-defence-group.jpg'),
-    caption: 'Srutanik, Saisab, Himadri and Ashim after their MS thesis defence (left to right)',
-    category: 'Milestones',
-    width: 4160,
-    height: 3120,
-  },
-  {
-    image: getImagePath('ashim-thesis-defence.jpg'),
-    caption: 'Ashim after his successful thesis defence',
-    category: 'Milestones',
-    width: 1600,
-    height: 1200,
-  },
-  {
     image: getImagePath('himadri-thesis-defence.jpg'),
     caption: 'Himadri after her successful thesis defence',
     category: 'Milestones',
@@ -117,13 +96,6 @@ const galleryImages: Photo[] = [
     category: 'Milestones',
     width: 1200,
     height: 1600,
-  },
-  {
-    image: getImagePath('ms-students-felicitation.jpg'),
-    caption: 'Felicitation of the MS students at BDS Lab',
-    category: 'Milestones',
-    width: 4000,
-    height: 3000,
   },
   {
     image: getImagePath('ms-felicitation-saisab.jpeg'),

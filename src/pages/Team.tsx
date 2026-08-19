@@ -68,6 +68,22 @@ export default function Team() {
         linkedin: '',
         scholarProfile: "",
         image: getImagePath("riya.jpeg")
+      },
+      {
+        name: "Nishtha Sharma",
+        research: "Recently Joined PhD Student",
+        email: "",
+        linkedin: '',
+        scholarProfile: "",
+        image: getImagePath("nishtha.jpg")
+      },
+      {
+        name: "Pragati Agrawal",
+        research: "Recently Joined PhD Student",
+        email: "",
+        linkedin: '',
+        scholarProfile: "",
+        image: getImagePath("pragati.jpg")
       }
     ],
     mastersStudents: [
